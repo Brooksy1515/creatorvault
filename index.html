@@ -7,19 +7,24 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <style>
       :root {
-        --ink: #1f2937;
-        --muted-text: #6b7280;
-        --blue: #2563eb;
-        --blue-dark: #1e3a8a;
-        --blue-light: #dbeafe;
-        --moss: #5f7462;
-        --clay: #b9957d;
-        --coral: #d97757;
-        --sky: #eef6f4;
-        --oat: #e7dcd2;
-        --canvas: #fafaf9;
+        --ink: #111827;
+        --muted-text: #64748b;
+        --blue: #00f2ea;
+        --blue-dark: #0f172a;
+        --blue-light: #ccfbf1;
+        --moss: #475569;
+        --clay: #94a3b8;
+        --coral: #ff0050;
+        --sky: #f0fdfa;
+        --oat: #fff1f5;
+        --canvas: #f8fafc;
         --paper: #ffffff;
-        --line: rgba(31, 41, 55, 0.11);
+        --line: rgba(15, 23, 42, 0.11);
+        --tiktok-red: #ff0050;
+        --tiktok-cyan: #00f2ea;
+        --tiktok-black: #010101;
+        --soft-cyan: #e6fffd;
+        --soft-pink: #fff1f5;
       }
 
       * {
@@ -31,7 +36,9 @@
         min-height: 100vh;
         overflow-x: hidden;
         background:
-          linear-gradient(180deg, rgba(231, 220, 210, 0.45), rgba(250, 250, 249, 0.82) 520px),
+          radial-gradient(circle at 9% 4%, rgba(0, 242, 234, 0.22), transparent 28%),
+          radial-gradient(circle at 96% 2%, rgba(255, 0, 80, 0.15), transparent 26%),
+          linear-gradient(180deg, rgba(248, 250, 252, 0.92), rgba(255, 255, 255, 0.86) 520px),
           var(--canvas);
         color: var(--ink);
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -82,10 +89,13 @@
         width: 44px;
         height: 44px;
         border-radius: 8px;
-        background: linear-gradient(135deg, var(--blue), #06b6d4);
+        background:
+          linear-gradient(135deg, rgba(0, 242, 234, 0.96), rgba(0, 242, 234, 0) 48%),
+          linear-gradient(315deg, rgba(255, 0, 80, 0.96), rgba(255, 0, 80, 0) 50%),
+          #050505;
         color: white;
         font-weight: 800;
-        box-shadow: 0 12px 26px rgba(37, 99, 235, 0.28);
+        box-shadow: 8px 8px 0 rgba(255, 0, 80, 0.2), -8px -8px 0 rgba(0, 242, 234, 0.18);
       }
 
       h1,
@@ -130,8 +140,11 @@
 
       .nav button.active,
       .tab button.active {
-        background: var(--ink);
+        background:
+          linear-gradient(90deg, rgba(0, 242, 234, 0.22), transparent 44%),
+          linear-gradient(135deg, var(--tiktok-black), #171717);
         color: white;
+        box-shadow: inset 3px 0 0 var(--tiktok-cyan);
       }
 
       .main {
@@ -171,15 +184,19 @@
       }
 
       .btn.primary {
-        border-color: var(--blue);
-        background: var(--blue);
-        color: white;
+        border-color: var(--tiktok-black);
+        background:
+          linear-gradient(135deg, rgba(0, 242, 234, 0.95), rgba(0, 242, 234, 0.58)),
+          var(--tiktok-black);
+        color: #061314;
+        box-shadow: 0 10px 22px rgba(0, 242, 234, 0.2);
       }
 
       .btn.coral {
-        border-color: var(--coral);
-        background: var(--coral);
+        border-color: var(--tiktok-red);
+        background: var(--tiktok-red);
         color: white;
+        box-shadow: 0 10px 22px rgba(255, 0, 80, 0.18);
       }
 
       .tab {
@@ -195,7 +212,8 @@
       }
 
       .tab button.active {
-        background: var(--clay);
+        background: var(--tiktok-red);
+        color: white;
       }
 
       .grid {
@@ -235,8 +253,8 @@
 
       .metric[data-jump]:hover {
         transform: translateY(-2px);
-        border-color: rgba(37, 99, 235, 0.22);
-        box-shadow: 0 16px 34px rgba(31, 41, 55, 0.09);
+        border-color: rgba(0, 242, 234, 0.44);
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.09);
       }
 
       .metric[data-jump]::after {
@@ -263,9 +281,9 @@
         align-items: center;
         border: 1px solid var(--line);
         border-radius: 999px;
-        background: white;
+        background: linear-gradient(90deg, rgba(0, 242, 234, 0.14), rgba(255, 0, 80, 0.08));
         padding: 5px 10px;
-        color: rgba(24, 32, 29, 0.74);
+        color: rgba(15, 23, 42, 0.82);
         font-size: 12px;
         font-weight: 750;
       }
@@ -403,7 +421,10 @@
         width: 48px;
         height: 48px;
         border-radius: 999px;
-        background: linear-gradient(135deg, #111827, var(--blue));
+        background:
+          linear-gradient(135deg, rgba(0, 242, 234, 0.95), transparent 46%),
+          linear-gradient(315deg, rgba(255, 0, 80, 0.9), transparent 48%),
+          #050505;
         color: white;
         font-weight: 900;
       }
@@ -437,8 +458,8 @@
         place-items: center;
         border-radius: 8px;
         background:
-          linear-gradient(135deg, rgba(37, 99, 235, 0.88), rgba(6, 182, 212, 0.74)),
-          #2563eb;
+          linear-gradient(135deg, rgba(0, 242, 234, 0.88), rgba(255, 0, 80, 0.72)),
+          #050505;
         color: white;
         font-size: 42px;
         font-weight: 900;
@@ -450,8 +471,8 @@
         min-height: 168px;
         border-radius: 8px;
         background:
-          radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.8), transparent 26%),
-          linear-gradient(135deg, #dbeafe, #ffffff 46%, #e7dcd2);
+          radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.9), transparent 26%),
+          linear-gradient(135deg, rgba(0, 242, 234, 0.22), #ffffff 46%, rgba(255, 0, 80, 0.14));
         color: var(--blue-dark);
         font-size: 42px;
         font-weight: 950;
@@ -506,7 +527,7 @@
         border-radius: 8px;
         background:
           radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.92), transparent 30%),
-          linear-gradient(145deg, #dbeafe, #ffffff 52%, #e7dcd2);
+          linear-gradient(145deg, rgba(0, 242, 234, 0.24), #ffffff 52%, rgba(255, 0, 80, 0.16));
         color: var(--blue-dark);
         font-size: clamp(54px, 8vw, 92px);
         font-weight: 950;
@@ -533,7 +554,7 @@
         border-radius: 8px;
         background:
           radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.82), transparent 28%),
-          linear-gradient(135deg, #dbeafe, #ffffff 48%, #e7dcd2);
+          linear-gradient(135deg, rgba(0, 242, 234, 0.22), #ffffff 48%, rgba(255, 0, 80, 0.14));
         color: var(--blue-dark);
         font-size: 28px;
         font-weight: 950;
@@ -554,7 +575,7 @@
       }
 
       .hub-card:hover {
-        border-color: rgba(37, 99, 235, 0.24);
+        border-color: rgba(0, 242, 234, 0.36);
         box-shadow: 0 14px 30px rgba(31, 41, 55, 0.08);
       }
 
@@ -581,7 +602,9 @@
         width: 46px;
         height: 46px;
         border-radius: 8px;
-        background: var(--blue-light);
+        background:
+          linear-gradient(135deg, rgba(0, 242, 234, 0.28), rgba(255, 0, 80, 0.12)),
+          white;
         color: var(--blue-dark);
         font-weight: 950;
       }
@@ -622,6 +645,27 @@
 
       .workspace-live.active {
         display: grid;
+      }
+
+      .pro-demo-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 16px;
+      }
+
+      .pro-output {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .pro-output .card {
+        border-left: 4px solid var(--blue);
+      }
+
+      .upgrade-banner {
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        background: linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(255, 255, 255, 0.98));
       }
 
       .mode-toggle {
@@ -709,24 +753,26 @@
         min-height: 40px;
         padding: 10px 12px;
         border: 1px solid transparent;
-        color: #4b5563;
+        color: #475569;
       }
 
       .nav button:hover {
-        border-color: rgba(37, 99, 235, 0.12);
-        background: rgba(37, 99, 235, 0.045);
+        border-color: rgba(0, 242, 234, 0.24);
+        background: rgba(0, 242, 234, 0.06);
         color: var(--blue-dark);
       }
 
       .nav button.active {
-        border-color: rgba(37, 99, 235, 0.16);
-        background: linear-gradient(90deg, rgba(219, 234, 254, 0.96), rgba(255, 255, 255, 0.95));
+        border-color: rgba(0, 242, 234, 0.2);
+        background:
+          linear-gradient(90deg, rgba(0, 242, 234, 0.2), rgba(255, 255, 255, 0.95)),
+          white;
         color: var(--blue-dark);
-        box-shadow: inset 3px 0 0 var(--blue);
+        box-shadow: inset 3px 0 0 var(--tiktok-red);
       }
 
       .sandbox {
-        background: linear-gradient(180deg, rgba(219, 234, 254, 0.78), rgba(255, 255, 255, 0.92));
+        background: linear-gradient(180deg, rgba(0, 242, 234, 0.11), rgba(255, 0, 80, 0.06), rgba(255, 255, 255, 0.92));
       }
 
       .main {
@@ -761,7 +807,7 @@
       }
 
       .btn.primary {
-        box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+        box-shadow: 0 12px 24px rgba(0, 242, 234, 0.2);
       }
 
       .tab {
@@ -775,8 +821,8 @@
       }
 
       .tab button.active {
-        border-color: rgba(37, 99, 235, 0.16);
-        background: var(--blue);
+        border-color: rgba(255, 0, 80, 0.22);
+        background: var(--tiktok-red);
         color: white;
       }
 
@@ -797,7 +843,7 @@
 
       .section > .panel.card:first-child {
         background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(219, 234, 254, 0.54)),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(0, 242, 234, 0.12), rgba(255, 0, 80, 0.06)),
           #ffffff;
         padding: clamp(18px, 3vw, 30px);
       }
@@ -813,8 +859,8 @@
       }
 
       .chip {
-        border-color: rgba(37, 99, 235, 0.14);
-        background: rgba(219, 234, 254, 0.72);
+        border-color: rgba(0, 242, 234, 0.2);
+        background: linear-gradient(90deg, rgba(0, 242, 234, 0.16), rgba(255, 0, 80, 0.08));
         color: var(--blue-dark);
       }
 
@@ -841,8 +887,8 @@
       }
 
       .field:focus {
-        border-color: rgba(37, 99, 235, 0.42);
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        border-color: rgba(0, 242, 234, 0.5);
+        box-shadow: 0 0 0 4px rgba(0, 242, 234, 0.13);
       }
 
       .row {
@@ -850,29 +896,29 @@
       }
 
       .row:not(.table-head):hover {
-        background: rgba(219, 234, 254, 0.3);
+        background: rgba(0, 242, 234, 0.08);
       }
 
       .table-head {
-        background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+        background: linear-gradient(90deg, var(--tiktok-black), var(--tiktok-red), var(--tiktok-cyan));
       }
 
       .notice {
         border-radius: 8px;
-        border-top: 1px solid rgba(217, 119, 87, 0.18);
-        border-right: 1px solid rgba(217, 119, 87, 0.18);
-        border-bottom: 1px solid rgba(217, 119, 87, 0.18);
+        border-top: 1px solid rgba(255, 0, 80, 0.18);
+        border-right: 1px solid rgba(255, 0, 80, 0.18);
+        border-bottom: 1px solid rgba(0, 242, 234, 0.2);
       }
 
       .money {
         background:
-          linear-gradient(135deg, rgba(238, 246, 244, 0.96), rgba(255, 255, 255, 0.92)),
+          linear-gradient(135deg, rgba(0, 242, 234, 0.1), rgba(255, 255, 255, 0.94)),
           white;
       }
 
       .rescue {
         background:
-          linear-gradient(135deg, rgba(231, 220, 210, 0.45), rgba(255, 255, 255, 0.94)),
+          linear-gradient(135deg, rgba(255, 0, 80, 0.08), rgba(255, 255, 255, 0.94)),
           white;
       }
 
@@ -975,6 +1021,10 @@
         .file-row {
           grid-template-columns: 1fr;
         }
+
+        .pro-demo-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -982,7 +1032,7 @@
     <div class="app">
       <aside class="sidebar panel">
         <div class="brand">
-          <div class="logo">CS</div>
+          <div class="logo">CV</div>
           <div>
             <p class="muted">CreatorVault</p>
             <h1>Creator Workspace</h1>
@@ -1132,7 +1182,7 @@
                 <li>Reuse Engine: turn one product clip into TikTok remakes, Amazon videos, Reels, Shorts, and ads</li>
                 <li>Advanced performance tracking: clicks, sales, winner notes, and what to remake</li>
               </ul>
-              <button class="btn coral" data-jump="Vault">Preview Pro Vault</button>
+              <button class="btn coral" data-jump="Pro Demo">Try Pro tools</button>
             </div>
           </div>
 
@@ -1151,6 +1201,57 @@
               <p class="label">Upgrade moment</p>
               <h3 style="margin-top: 6px">When they film multiple products.</h3>
               <p class="muted" style="margin-top: 8px">Once a creator films several products in one day, they need Pro to keep every clip connected and searchable.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Pro Demo">
+          <div class="panel card upgrade-banner">
+            <p class="label">Pro demo workspace</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Show testers why Pro is worth paying for.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 900px">This demo turns on the paid workflow: full showcase import, auto-match videos, reuse ideas, and rescue alerts for lost drafts or missing clips.</p>
+            <div class="actions" style="margin-top: 14px">
+              <button class="btn primary" id="activate-pro-demo">Turn on Pro demo</button>
+              <button class="btn" id="pro-full-import">Pull full Showcase</button>
+              <button class="btn coral" id="pro-auto-match">Run Auto-Match</button>
+            </div>
+          </div>
+
+          <div class="pro-demo-grid">
+            <div class="panel card">
+              <p class="label">Paid function 1</p>
+              <h3 style="margin-top: 6px">Full Showcase Import</h3>
+              <p class="muted" style="margin-top: 8px">Free gives a small test set. Pro pulls the whole showcase and creates a workspace for every product so creators do not have to rebuild it by hand.</p>
+              <div id="pro-import-output" class="pro-output">
+                <div class="notice"><strong>Not run yet.</strong><p class="muted" style="margin-top: 6px">Click Pull full Showcase to see the paid import preview.</p></div>
+              </div>
+            </div>
+
+            <div class="panel card">
+              <p class="label">Paid function 2</p>
+              <h3 style="margin-top: 6px">Auto-Match Studio</h3>
+              <p class="muted" style="margin-top: 8px">Pro suggests which raw clips, CapCut exports, AI clips, scripts, and posts belong to each product workspace.</p>
+              <div id="pro-match-output" class="pro-output">
+                <div class="notice"><strong>No matches yet.</strong><p class="muted" style="margin-top: 6px">Click Run Auto-Match to attach demo clips to the active product.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card rescue">
+              <p class="label">Paid function 3</p>
+              <h3 style="margin-top: 6px">Crash Rescue Queue</h3>
+              <p class="muted" style="margin-top: 8px">For the real pain: CapCut crashes, TikTok draft loss, missing selfie zoom shots, and clips that need to be re-filmed.</p>
+              <button class="btn primary" id="pro-rescue">Build rescue list</button>
+              <div id="pro-rescue-output" class="pro-output"></div>
+            </div>
+
+            <div class="panel card money">
+              <p class="label">Paid function 4</p>
+              <h3 style="margin-top: 6px">Reuse Engine</h3>
+              <p class="muted" style="margin-top: 8px">Turn one product workspace into new TikToks, Amazon videos, Reels, Shorts, and reminder posts.</p>
+              <button class="btn coral" id="pro-reuse">Generate reuse plan</button>
+              <div id="pro-reuse-output" class="pro-output"></div>
             </div>
           </div>
         </section>
@@ -1577,7 +1678,7 @@
             <div class="panel card">
               <p class="label">Connected scripts</p>
               <h3 style="margin-top: 6px">Angles for this product</h3>
-              <div class="stack" style="margin-top: 14px">
+              <div class="stack" id="workspace-scripts" style="margin-top: 14px">
                 <div class="card"><strong>Primary product demo</strong><p class="muted">Main hook, problem, voiceover, on-screen text, CTA, and hashtags.</p><span class="chip">filmed</span></div>
                 <div class="card"><strong>Second angle idea</strong><p class="muted">A fast remix angle for another platform or future post.</p><span class="chip">idea</span></div>
               </div>
@@ -1596,7 +1697,7 @@
             <div class="panel card">
               <p class="label">Connected vault assets</p>
               <h3 style="margin-top: 6px">Saved content</h3>
-              <div class="stack" style="margin-top: 14px">
+              <div class="stack" id="workspace-assets" style="margin-top: 14px">
                 <div class="card"><strong>AI intro clip</strong><p class="muted">Generated clip saved with the product before editing.</p><span class="chip">AI clip</span></div>
                 <div class="card"><strong>Raw product demo</strong><p class="muted">Camera clip saved before it gets buried in the phone.</p><span class="chip">Raw</span></div>
                 <div class="card"><strong>Captioned final edit</strong><p class="muted">Finished export ready for final review and scheduling.</p><span class="chip">Final</span></div>
@@ -1678,10 +1779,11 @@
               <div class="card"><strong>Missing shot reminder</strong><p class="muted">Refilm need saved and attached to the product workspace.</p><span class="chip">Needs shot</span></div>
             </div>
             <div class="grid three" style="margin-top: 14px">
-              <input class="field" placeholder="File name or link" />
-              <select class="field"><option>Raw clip</option><option>AI clip</option><option>CapCut export</option><option>TikTok draft backup</option><option>Final video</option><option>Reusable B-roll</option></select>
-              <input class="field" placeholder="Product or filming plan" />
+              <input class="field" id="vault-name" placeholder="File name or link" />
+              <select class="field" id="vault-type"><option>Raw clip</option><option>AI clip</option><option>CapCut export</option><option>TikTok draft backup</option><option>Final video</option><option>Reusable B-roll</option></select>
+              <input class="field" id="vault-note" placeholder="Product note, filming plan, or where it is saved" />
             </div>
+            <button class="btn primary" id="save-vault-asset" style="margin-top: 14px">Save to active product</button>
             <div class="grid three" style="margin-top: 14px">
               <div class="card locked pro-only"><strong>Bulk upload</strong><p class="muted">Add many files at once from phone, desktop, or cloud folder.</p></div>
               <div class="card locked pro-only"><strong>Auto-sort</strong><p class="muted">Suggest product, filming plan, raw/final/AI, and missing shot status.</p></div>
@@ -1724,12 +1826,13 @@
               <p class="label">Create script</p>
               <h3 style="margin-top: 6px">Builder fields</h3>
               <div class="stack" style="margin-top: 14px">
-                <input class="field" value="Connected affiliate product" />
-                <input class="field" value="The quick hook that makes someone stop scrolling." />
-                <textarea class="field">Write the voiceover, proof point, product benefit, and creator note here so the clip can be filmed, edited, posted, and reused later.</textarea>
-                <input class="field" value="Short on-screen text that explains the value fast." />
-                <input class="field" value="Clear CTA tied to the product link or next action." />
-                <select class="field"><option>idea</option><option selected>scripted</option><option>filmed</option><option>posted</option></select>
+                <input class="field" id="script-product" value="Connected affiliate product" />
+                <input class="field" id="script-hook" value="The quick hook that makes someone stop scrolling." />
+                <textarea class="field" id="script-voiceover">Write the voiceover, proof point, product benefit, and creator note here so the clip can be filmed, edited, posted, and reused later.</textarea>
+                <input class="field" id="script-onscreen" value="Short on-screen text that explains the value fast." />
+                <input class="field" id="script-cta" value="Clear CTA tied to the product link or next action." />
+                <select class="field" id="script-status"><option>idea</option><option selected>scripted</option><option>filmed</option><option>posted</option></select>
+                <button class="btn primary" id="save-script">Save script to active product</button>
               </div>
             </div>
             <div class="panel card">
@@ -1803,7 +1906,7 @@
     </div>
 
     <script>
-      const sections = ["What We Are", "Plans", "Test & Share", "Import Hub", "TikTok Connect", "Product Workspace", "Command Center", "Samples", "Filming", "Vault", "Products", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
+      const sections = ["What We Are", "Plans", "Pro Demo", "Test & Share", "Import Hub", "TikTok Connect", "Product Workspace", "Command Center", "Samples", "Filming", "Vault", "Products", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
       const products = [
         ["Affiliate product ready to film", "Brand saved", "Creator niche", "Amazon", "8.5%", "Ready to film", "Product, sample, clips, scripts, and post plan stay connected."],
         ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "15%", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."],
@@ -1842,6 +1945,39 @@
           platform: "TikTok Shop",
           filmingTask: "Create a new hook and reuse the strongest B-roll from the first video.",
           scriptStarter: "Here is what I would show differently after using this for a full week."
+        },
+        {
+          name: "Silicone Travel Makeup Pouch",
+          brand: "Beauty Travel Co",
+          initials: "MP",
+          category: "Travel / Beauty",
+          commission: "16%",
+          status: "Showcase product only",
+          platform: "TikTok Shop",
+          filmingTask: "Film purse dump, packing test, zipper closeup, and final packed bag shot.",
+          scriptStarter: "I did not think this would fit everything, so I tested it with my actual daily makeup."
+        },
+        {
+          name: "Mini Desk Vacuum",
+          brand: "Clean Desk Finds",
+          initials: "DV",
+          category: "Home Office",
+          commission: "20%",
+          status: "New sample requested",
+          platform: "TikTok Shop",
+          filmingTask: "Film crumbs on desk, one-pass cleanup, noise test, and closeup of the bin.",
+          scriptStarter: "If your workspace gets messy while you film or work, this tiny cleanup tool is oddly satisfying."
+        },
+        {
+          name: "Heatless Curling Rod Set",
+          brand: "Morning Hair Sample",
+          initials: "HC",
+          category: "Beauty / Hair",
+          commission: "14%",
+          status: "Needs TikTok content",
+          platform: "TikTok Shop",
+          filmingTask: "Film night setup, morning reveal, closeup curl check, and honest wear test.",
+          scriptStarter: "I wanted to see if this actually worked overnight, so I filmed the full before and after."
         }
       ];
       const hooks = [
@@ -1855,22 +1991,132 @@
       const tabs = document.querySelector("#tabs");
       const title = document.querySelector("#page-title");
 
-      function selectShowcaseProduct(index) {
-        const product = showcaseItems[index];
-        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (character) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[character]);
+      }
+
+      function productKey(product) {
+        return product?.name || "Unselected product";
+      }
+
+      function getActiveProduct() {
+        const saved = localStorage.getItem("creatorvault-selected-product");
+        if (!saved) return showcaseItems[0];
+        try {
+          return JSON.parse(saved);
+        } catch {
+          return showcaseItems[0];
+        }
+      }
+
+      function getProductRecords() {
+        try {
+          return JSON.parse(localStorage.getItem("creatorvault-product-records") || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function saveProductRecord(product, updates) {
+        const records = getProductRecords();
+        const key = productKey(product);
+        records[key] = {
+          status: product.status,
+          scripts: [],
+          assets: [],
+          hooks: [],
+          ...(records[key] || {}),
+          ...updates
+        };
+        localStorage.setItem("creatorvault-product-records", JSON.stringify(records));
+        renderWorkspaceConnections(product);
+      }
+
+      function notify(message) {
+        const status = document.querySelector("#import-status");
+        if (!status) return;
+        status.textContent = message;
+        status.classList.add("active");
+      }
+
+      function currentPlan() {
+        return document.body.dataset.plan || "free";
+      }
+
+      function visibleShowcaseItems() {
+        return currentPlan() === "pro" || localStorage.getItem("creatorvault-pro-demo") === "true"
+          ? showcaseItems
+          : showcaseItems.slice(0, 3);
+      }
+
+      function renderWorkspaceConnections(product) {
+        const records = getProductRecords();
+        const record = records[productKey(product)] || { scripts: [], assets: [], hooks: [] };
+        const scriptHost = document.querySelector("#workspace-scripts");
+        const assetHost = document.querySelector("#workspace-assets");
+
+        if (scriptHost) {
+          const savedScripts = [...(record.hooks || []).map((hook) => ({
+            hook,
+            voiceover: "Saved from Hook Bank. Build this into a product script.",
+            status: "hook"
+          })), ...(record.scripts || [])];
+          scriptHost.innerHTML = savedScripts.length
+            ? savedScripts.map((script) => `
+              <div class="card">
+                <strong>${escapeHtml(script.hook || "Saved script")}</strong>
+                <p class="muted">${escapeHtml(script.voiceover || "Voiceover and product notes saved here.")}</p>
+                <span class="chip">${escapeHtml(script.status || "scripted")}</span>
+              </div>
+            `).join("")
+            : `<div class="card"><strong>No saved scripts yet</strong><p class="muted">Create a script or attach a hook and it will show here for ${escapeHtml(product.name)}.</p></div>`;
+        }
+
+        if (assetHost) {
+          const savedAssets = record.assets || [];
+          assetHost.innerHTML = savedAssets.length
+            ? savedAssets.map((asset) => `
+              <div class="card">
+                <strong>${escapeHtml(asset.name)}</strong>
+                <p class="muted">${escapeHtml(asset.note || "Saved to this product workspace.")}</p>
+                <span class="chip">${escapeHtml(asset.type || "Asset")}</span>
+              </div>
+            `).join("")
+            : `<div class="card"><strong>No saved clips yet</strong><p class="muted">Import camera clips, CapCut exports, AI clips, or final videos and they will show here.</p></div>`;
+        }
+      }
+
+      function updateWorkspaceProduct(product) {
+        const records = getProductRecords();
+        const record = records[productKey(product)] || {};
         document.querySelector("#workspace-title").textContent = product.name;
         document.querySelector("#workspace-photo").textContent = product.initials;
         document.querySelector("#workspace-description").textContent = `${product.brand} sample pulled from TikTok Showcase and ready to connect to scripts, clips, filming plans, posts, and performance.`;
         document.querySelector("#workspace-platform").textContent = product.platform;
         document.querySelector("#workspace-commission").textContent = `${product.commission} commission`;
-        document.querySelector("#workspace-delivery").textContent = product.status;
+        document.querySelector("#workspace-delivery").textContent = record.status || product.status;
         document.querySelector("#workspace-sample-status").value =
-          product.status === "Sample delivered" ? "New sample received" : "Showcase product only";
+          record.status || (product.status === "Sample delivered" ? "New sample received" : "Showcase product only");
         document.querySelector("#live-product-name").textContent = product.name;
-        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${product.status} - ${product.commission} commission.`;
+        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${record.status || product.status} - ${product.commission} commission.`;
         document.querySelector("#live-filming-task").textContent = product.filmingTask;
         document.querySelector("#live-script-starter").textContent = product.scriptStarter;
+        document.querySelector("#script-product").value = product.name;
+        document.querySelector("#vault-note").value = product.name;
         document.querySelector("#workspace-live").classList.add("active");
+        renderWorkspaceConnections(product);
+      }
+
+      function selectShowcaseProduct(index) {
+        const product = showcaseItems[index];
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        updateWorkspaceProduct(product);
         switchSection("Product Workspace");
       }
 
@@ -1878,7 +2124,8 @@
         const host = document.querySelector("#showcase-list");
         host.innerHTML = `<div class="grid three"></div>`;
         const grid = host.querySelector(".grid");
-        showcaseItems.forEach((item, index) => {
+        visibleShowcaseItems().forEach((item) => {
+          const index = showcaseItems.findIndex((product) => product.name === item.name);
           const card = document.createElement("article");
           card.className = "card sample-card";
           card.innerHTML = `
@@ -1911,7 +2158,8 @@
 
         host.innerHTML = `<div class="grid three"></div>`;
         const grid = host.querySelector(".grid");
-        showcaseItems.forEach((item, index) => {
+        visibleShowcaseItems().forEach((item) => {
+          const index = showcaseItems.findIndex((product) => product.name === item.name);
           const card = document.createElement("article");
           card.className = "card sample-card";
           card.innerHTML = `
@@ -1962,9 +2210,26 @@
                 <option>Final video</option>
                 <option>Reusable B-roll</option>
               </select>
-              <button class="btn primary" data-jump="Product Workspace">Attach</button>
+              <button class="btn primary" type="button">Attach</button>
             </div>
           `;
+          const typeSelect = row.querySelector("select");
+          row.querySelector("button").addEventListener("click", () => {
+            const product = getActiveProduct();
+            localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+            const records = getProductRecords();
+            const existing = records[productKey(product)]?.assets || [];
+            saveProductRecord(product, {
+              assets: [...existing, {
+                name: file.name,
+                type: typeSelect.value === "Attach to active product" ? "Imported file" : typeSelect.value,
+                note: `${file.type || "File"} - ${(file.size / 1024 / 1024).toFixed(1)} MB`
+              }]
+            });
+            updateWorkspaceProduct(product);
+            notify(`${file.name} saved to ${product.name}.`);
+            switchSection("Product Workspace");
+          });
           host.appendChild(row);
         });
       }
@@ -2012,13 +2277,122 @@
           const card = document.createElement("article");
           card.className = "card";
           card.innerHTML = `<span class="chip">${hook[0]}</span><p style="margin-top:12px;font-size:18px;font-weight:750">${hook[1]}</p><div class="actions" style="margin-top:12px"><button class="btn">Copy hook</button><button class="btn" data-jump="Product Workspace">Attach to product</button></div>`;
-          card.querySelector("button").addEventListener("click", async (event) => {
+          const buttons = card.querySelectorAll("button");
+          buttons[0].addEventListener("click", async (event) => {
             await navigator.clipboard.writeText(hook[1]);
             event.currentTarget.textContent = "Copied";
             setTimeout(() => (event.currentTarget.textContent = "Copy hook"), 1200);
           });
+          buttons[1].addEventListener("click", () => {
+            const product = getActiveProduct();
+            localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+            const records = getProductRecords();
+            const existing = records[productKey(product)]?.hooks || [];
+            saveProductRecord(product, { hooks: [...existing, hook[1]] });
+            updateWorkspaceProduct(product);
+            notify(`Hook attached to ${product.name}.`);
+            switchSection("Product Workspace");
+          });
             host.appendChild(card);
           });
+      }
+
+      function activateProDemo() {
+        document.body.dataset.plan = "pro";
+        localStorage.setItem("creatorvault-pro-demo", "true");
+        localStorage.setItem("creatorvault-showcase-pulled", "true");
+        renderShowcaseItems();
+        renderPulledProducts();
+        notify("Pro demo is on. Full showcase, auto-match, rescue, and reuse tools are now available to test.");
+      }
+
+      function renderFullImportDemo() {
+        activateProDemo();
+        const host = document.querySelector("#pro-import-output");
+        if (!host) return;
+        host.innerHTML = showcaseItems.map((item) => `
+          <div class="card">
+            <strong>${escapeHtml(item.name)}</strong>
+            <p class="muted">${escapeHtml(item.brand)} - ${escapeHtml(item.category)} - ${escapeHtml(item.status)}</p>
+            <span class="chip">${escapeHtml(item.commission)} commission</span>
+          </div>
+        `).join("");
+      }
+
+      function runAutoMatchDemo() {
+        activateProDemo();
+        const product = getActiveProduct();
+        const records = getProductRecords();
+        const existingAssets = records[productKey(product)]?.assets || [];
+        const existingScripts = records[productKey(product)]?.scripts || [];
+        const matchedAssets = [
+          { name: `${product.initials.toLowerCase()}-raw-demo-clip.mov`, type: "Raw camera clip", note: "Auto-matched from camera roll by product name and filming date." },
+          { name: `${product.initials.toLowerCase()}-capcut-final.mp4`, type: "CapCut export", note: "Auto-matched as the newest final edit for this product." },
+          { name: `${product.initials.toLowerCase()}-ai-intro.mp4`, type: "AI clip", note: "Suggested as intro/B-roll for this product script." }
+        ];
+        const matchedScript = {
+          hook: product.scriptStarter,
+          voiceover: product.filmingTask,
+          onscreen: "Show problem, demo product, show result.",
+          cta: "Tap the product link before this sample sells out.",
+          status: "scripted"
+        };
+        saveProductRecord(product, {
+          assets: [...existingAssets, ...matchedAssets],
+          scripts: [...existingScripts, matchedScript]
+        });
+        updateWorkspaceProduct(product);
+
+        const host = document.querySelector("#pro-match-output");
+        if (host) {
+          host.innerHTML = matchedAssets.map((asset) => `
+            <div class="card">
+              <strong>${escapeHtml(asset.name)}</strong>
+              <p class="muted">${escapeHtml(asset.note)}</p>
+              <span class="chip">${escapeHtml(asset.type)}</span>
+            </div>
+          `).join("");
+        }
+        notify(`Auto-Match attached demo clips and a script to ${product.name}.`);
+      }
+
+      function buildRescueDemo() {
+        activateProDemo();
+        const host = document.querySelector("#pro-rescue-output");
+        if (!host) return;
+        const items = [
+          ["CapCut final not backed up", "Save final export to Vault before posting."],
+          ["TikTok draft risk", "Create draft backup note with caption, product link, and sound."],
+          ["Missing selfie zoom", "Refilm closeup and reaction shot before editing."],
+          ["AI clip not attached", "Attach generated intro to active product workspace."]
+        ];
+        host.innerHTML = items.map(([titleText, detail]) => `
+          <div class="card">
+            <strong>${titleText}</strong>
+            <p class="muted">${detail}</p>
+            <span class="chip">Rescue action</span>
+          </div>
+        `).join("");
+      }
+
+      function generateReuseDemo() {
+        activateProDemo();
+        const product = getActiveProduct();
+        const host = document.querySelector("#pro-reuse-output");
+        if (!host) return;
+        const ideas = [
+          ["TikTok remake", `Use the strongest hook for ${product.name} and cut it to 12 seconds.`],
+          ["Amazon video", "Remove trend wording, keep the product demo, add clear benefit text."],
+          ["Instagram Reel", "Use the before/after clip with a calmer caption and lifestyle framing."],
+          ["Follow-up post", "Answer the most likely comment or concern in a second video."]
+        ];
+        host.innerHTML = ideas.map(([titleText, detail]) => `
+          <div class="card">
+            <strong>${titleText}</strong>
+            <p class="muted">${detail}</p>
+            <span class="chip">Reuse idea</span>
+          </div>
+        `).join("");
       }
 
       document.querySelector("#product-search").addEventListener("input", renderProducts);
@@ -2027,6 +2401,59 @@
       document.querySelector("#file-import")?.addEventListener("change", (event) => {
         renderImportedFiles(event.target.files || []);
       });
+      document.querySelector("#workspace-sample-status")?.addEventListener("change", (event) => {
+        const product = getActiveProduct();
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        saveProductRecord(product, { status: event.target.value });
+        document.querySelector("#workspace-delivery").textContent = event.target.value;
+        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${event.target.value} - ${product.commission} commission.`;
+        notify(`${product.name} status saved as ${event.target.value}.`);
+      });
+      document.querySelector("#save-script")?.addEventListener("click", () => {
+        const product = getActiveProduct();
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        const records = getProductRecords();
+        const existing = records[productKey(product)]?.scripts || [];
+        saveProductRecord(product, {
+          scripts: [...existing, {
+            hook: document.querySelector("#script-hook").value,
+            voiceover: document.querySelector("#script-voiceover").value,
+            onscreen: document.querySelector("#script-onscreen").value,
+            cta: document.querySelector("#script-cta").value,
+            status: document.querySelector("#script-status").value
+          }]
+        });
+        updateWorkspaceProduct(product);
+        notify(`Script saved to ${product.name}.`);
+        switchSection("Product Workspace");
+      });
+      document.querySelector("#save-vault-asset")?.addEventListener("click", () => {
+        const product = getActiveProduct();
+        const name = document.querySelector("#vault-name").value.trim();
+        if (!name) {
+          notify("Add a file name, link, or note first.");
+          return;
+        }
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        const records = getProductRecords();
+        const existing = records[productKey(product)]?.assets || [];
+        saveProductRecord(product, {
+          assets: [...existing, {
+            name,
+            type: document.querySelector("#vault-type").value,
+            note: document.querySelector("#vault-note").value
+          }]
+        });
+        document.querySelector("#vault-name").value = "";
+        updateWorkspaceProduct(product);
+        notify(`${name} saved to ${product.name}.`);
+        switchSection("Product Workspace");
+      });
+      document.querySelector("#activate-pro-demo")?.addEventListener("click", activateProDemo);
+      document.querySelector("#pro-full-import")?.addEventListener("click", renderFullImportDemo);
+      document.querySelector("#pro-auto-match")?.addEventListener("click", runAutoMatchDemo);
+      document.querySelector("#pro-rescue")?.addEventListener("click", buildRescueDemo);
+      document.querySelector("#pro-reuse")?.addEventListener("click", generateReuseDemo);
       document.querySelector("#pull-showcase")?.addEventListener("click", () => {
         localStorage.setItem("creatorvault-showcase-pulled", "true");
         document.querySelector("#import-status").classList.add("active");
@@ -2036,11 +2463,21 @@
       document.querySelectorAll(".mode-toggle button").forEach((button) => {
         button.addEventListener("click", () => {
           document.body.dataset.plan = button.dataset.plan;
+          if (button.dataset.plan === "pro") {
+            localStorage.setItem("creatorvault-pro-demo", "true");
+          } else {
+            localStorage.removeItem("creatorvault-pro-demo");
+          }
+          renderShowcaseItems();
+          renderPulledProducts();
         });
       });
       document.querySelectorAll("[data-jump]").forEach((button) => {
         button.addEventListener("click", () => switchSection(button.dataset.jump));
       });
+      if (localStorage.getItem("creatorvault-pro-demo") === "true") {
+        document.body.dataset.plan = "pro";
+      }
       renderProducts();
       renderHooks();
       renderPulledProducts();
@@ -2054,20 +2491,7 @@
         const parsed = JSON.parse(savedProduct);
         const index = showcaseItems.findIndex((item) => item.name === parsed.name);
         if (index >= 0) {
-          const product = showcaseItems[index];
-          document.querySelector("#workspace-title").textContent = product.name;
-          document.querySelector("#workspace-photo").textContent = product.initials;
-          document.querySelector("#workspace-description").textContent = `${product.brand} sample pulled from TikTok Showcase and ready to connect to scripts, clips, filming plans, posts, and performance.`;
-          document.querySelector("#workspace-platform").textContent = product.platform;
-          document.querySelector("#workspace-commission").textContent = `${product.commission} commission`;
-          document.querySelector("#workspace-delivery").textContent = product.status;
-          document.querySelector("#workspace-sample-status").value =
-            product.status === "Sample delivered" ? "New sample received" : "Showcase product only";
-          document.querySelector("#live-product-name").textContent = product.name;
-          document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${product.status} - ${product.commission} commission.`;
-          document.querySelector("#live-filming-task").textContent = product.filmingTask;
-          document.querySelector("#live-script-starter").textContent = product.scriptStarter;
-          document.querySelector("#workspace-live").classList.add("active");
+          updateWorkspaceProduct(showcaseItems[index]);
         }
       }
     </script>
