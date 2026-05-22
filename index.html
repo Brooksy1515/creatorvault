@@ -366,6 +366,60 @@
         opacity: 0.72;
       }
 
+      .account-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #111827, var(--blue));
+        color: white;
+        font-weight: 900;
+      }
+
+      .status-dot {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 800;
+        color: #047857;
+      }
+
+      .status-dot::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: #10b981;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.13);
+      }
+
+      .video-tile {
+        display: grid;
+        gap: 12px;
+      }
+
+      .thumb {
+        display: grid;
+        min-height: 150px;
+        place-items: center;
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(37, 99, 235, 0.88), rgba(6, 182, 212, 0.74)),
+          #2563eb;
+        color: white;
+        font-size: 42px;
+        font-weight: 900;
+      }
+
       .mode-toggle {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -869,18 +923,64 @@
         <section class="section" data-section="TikTok Connect">
           <div class="panel card">
             <p class="label">TikTok account and showcase</p>
-            <h3 style="margin-top: 6px; font-size: 28px">Connect TikTok so CreatorVault can become your product-to-post command center.</h3>
-            <p class="muted" style="margin-top: 10px; max-width: 880px">A creator should be able to safely connect their TikTok account, review what CreatorVault can access, and link posted videos or showcased products back to the product workspace where scripts, clips, batches, and results live.</p>
+            <h3 style="margin-top: 6px; font-size: 28px">TikTok is connected. Now match videos and showcase products back to CreatorVault.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 880px">This test screen shows what the connected experience should feel like: the creator sees their TikTok account, reviews pulled-in content, and connects each video or showcase product to the right product workspace.</p>
             <div class="actions" style="margin-top: 14px">
-              <button class="btn primary">Connect TikTok</button>
+              <button class="btn primary">Refresh TikTok</button>
               <button class="btn" data-jump="Product Workspace">View connected product</button>
             </div>
           </div>
 
-          <div class="panel card money">
-            <p class="label">Account to connect</p>
-            <h3 style="margin-top: 6px">@ericabrooks03</h3>
-            <p class="muted" style="margin-top: 8px">Tester preview account. In the full app, this connection would happen through TikTok's official authorization screen before CreatorVault can show videos, posting data, or showcase matches.</p>
+          <div class="panel card money account-card">
+            <div class="actions">
+              <div class="avatar">EB</div>
+              <div>
+                <p class="label">Connected TikTok</p>
+                <h3 style="margin-top: 4px">@ericabrooks03</h3>
+                <p class="muted" style="margin-top: 4px">Account connected for tester review.</p>
+              </div>
+            </div>
+            <span class="status-dot">Connected</span>
+          </div>
+
+          <div class="grid three">
+            <div class="panel card metric"><p class="muted">Videos to organize</p><strong>6</strong><p class="muted">Need product matches</p></div>
+            <div class="panel card metric"><p class="muted">Showcase products</p><strong>9</strong><p class="muted">Ready to connect</p></div>
+            <div class="panel card metric"><p class="muted">Draft backups</p><strong>3</strong><p class="muted">Protected in Vault</p></div>
+          </div>
+
+          <div class="panel card">
+            <p class="label">TikTok videos to match</p>
+            <h3 style="margin-top: 6px">Connect each posted video to the product, script, batch, and final asset.</h3>
+            <div class="grid three" style="margin-top: 14px">
+              <div class="card video-tile">
+                <div class="thumb">CV</div>
+                <strong>Product demo video</strong>
+                <p class="muted">Posted video needs to be connected to a product workspace.</p>
+                <div class="actions"><span class="chip">Needs match</span><button class="btn" data-jump="Product Workspace">Match product</button></div>
+              </div>
+              <div class="card video-tile">
+                <div class="thumb">AI</div>
+                <strong>AI intro plus product clip</strong>
+                <p class="muted">Final video appears to include a generated intro and raw product footage.</p>
+                <div class="actions"><span class="chip">Likely AI clip</span><button class="btn" data-jump="Vault">Save to Vault</button></div>
+              </div>
+              <div class="card video-tile">
+                <div class="thumb">AD</div>
+                <strong>High performing affiliate post</strong>
+                <p class="muted">Mark this as a winner so it can be remade for another platform.</p>
+                <div class="actions"><span class="chip">Reuse idea</span><button class="btn" data-jump="Performance">Track result</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel card">
+            <p class="label">Showcase products to confirm</p>
+            <h3 style="margin-top: 6px">Choose which TikTok Shop products belong in CreatorVault.</h3>
+            <div class="row table-head"><span>Showcase item</span><span>CreatorVault match</span><span>Status</span><span>Action</span></div>
+            <div class="row"><strong>Product from showcase<br /><span class="muted">Affiliate listing detected</span></strong><span>Needs product workspace</span><span class="chip">New</span><button class="btn" data-jump="Products">Add product</button></div>
+            <div class="row"><strong>Product already filmed<br /><span class="muted">Video exists, sample status missing</span></strong><span>Existing workspace</span><span class="chip">Partial</span><button class="btn" data-jump="Samples">Track sample</button></div>
+            <div class="row"><strong>Product with strong post<br /><span class="muted">Ready for reuse planning</span></strong><span>Connected</span><span class="chip">Matched</span><button class="btn" data-jump="Product Workspace">Open</button></div>
           </div>
 
           <div class="grid two">
