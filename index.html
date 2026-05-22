@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CreatorVault - Tester Preview</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --ink: #1f2937;
+        --muted-text: #6b7280;
+        --blue: #2563eb;
+        --blue-dark: #1e3a8a;
+        --blue-light: #dbeafe;
+        --moss: #5f7462;
+        --clay: #b9957d;
+        --coral: #d97757;
+        --sky: #eef6f4;
+        --oat: #e7dcd2;
+        --canvas: #fafaf9;
+        --paper: #ffffff;
+        --line: rgba(31, 41, 55, 0.11);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(231, 220, 210, 0.45), rgba(250, 250, 249, 0.82) 520px),
+          var(--canvas);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      .app {
+        display: flex;
+        gap: 16px;
+        width: min(1480px, 100%);
+        margin: 0 auto;
+        padding: 16px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        box-shadow: 0 18px 45px rgba(31, 41, 55, 0.06);
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 284px;
+        height: calc(100vh - 32px);
+        padding: 12px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--blue), #06b6d4);
+        color: white;
+        font-weight: 800;
+        box-shadow: 0 12px 26px rgba(37, 99, 235, 0.28);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .muted {
+        color: var(--muted-text);
+      }
+
+      .label {
+        color: rgba(31, 41, 55, 0.55);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: grid;
+        gap: 6px;
+      }
+
+      .nav button,
+      .tab button {
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: rgba(31, 41, 55, 0.68);
+        cursor: pointer;
+        font-weight: 750;
+      }
+
+      .nav button {
+        padding: 11px 12px;
+        text-align: left;
+      }
+
+      .nav button.active,
+      .tab button.active {
+        background: var(--ink);
+        color: white;
+      }
+
+      .main {
+        display: grid;
+        flex: 1;
+        min-width: 0;
+        gap: 16px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        color: var(--ink);
+        cursor: pointer;
+        padding: 10px 12px;
+        font-weight: 800;
+      }
+
+      .btn.primary {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: white;
+      }
+
+      .btn.coral {
+        border-color: var(--coral);
+        background: var(--coral);
+        color: white;
+      }
+
+      .tab {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding: 6px;
+      }
+
+      .tab button {
+        white-space: nowrap;
+        padding: 9px 12px;
+      }
+
+      .tab button.active {
+        background: var(--clay);
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .two {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 16px;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 32px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .chip {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: white;
+        padding: 5px 10px;
+        color: rgba(24, 32, 29, 0.74);
+        font-size: 12px;
+        font-weight: 750;
+      }
+
+      .field {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        color: rgba(31, 41, 55, 0.74);
+        outline: 0;
+        padding: 10px 12px;
+      }
+
+      textarea.field {
+        min-height: 116px;
+        resize: vertical;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: 1fr 210px auto;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: grid;
+        gap: 16px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1.1fr 0.8fr 0.8fr 0.8fr;
+        gap: 12px;
+        align-items: start;
+        padding: 16px;
+      }
+
+      .row + .row {
+        border-top: 1px solid var(--line);
+      }
+
+      .table-head {
+        background: var(--ink);
+        color: white;
+        font-weight: 800;
+      }
+
+      .sandbox {
+        background: rgba(231, 220, 210, 0.55);
+        padding: 16px;
+      }
+
+      .notice {
+        border-left: 4px solid var(--coral);
+        background: white;
+        padding: 12px;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(130px, 1fr));
+        gap: 10px;
+        overflow-x: auto;
+      }
+
+      .flow-step {
+        min-height: 112px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 12px;
+      }
+
+      .flow-step strong {
+        display: block;
+        margin-top: 8px;
+      }
+
+      .rescue {
+        border-color: rgba(217, 119, 87, 0.28);
+        background: rgba(231, 220, 210, 0.34);
+      }
+
+      .money {
+        border-color: rgba(95, 116, 98, 0.28);
+        background: rgba(238, 246, 244, 0.85);
+      }
+
+      .plan-card {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .plan-price {
+        font-size: 34px;
+        font-weight: 850;
+      }
+
+      .feature-list {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .feature-list li {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 10px 12px;
+      }
+
+      .locked {
+        opacity: 0.72;
+      }
+
+      .mode-toggle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 4px;
+      }
+
+      .mode-toggle button {
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--muted-text);
+        cursor: pointer;
+        padding: 8px;
+        font-weight: 800;
+      }
+
+      body[data-plan="pro"] .mode-toggle button[data-plan="pro"],
+      body[data-plan="free"] .mode-toggle button[data-plan="free"] {
+        background: var(--blue);
+        color: white;
+      }
+
+      body[data-plan="free"] .pro-only {
+        position: relative;
+      }
+
+      body[data-plan="free"] .pro-only::after {
+        content: "Pro";
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        border-radius: 999px;
+        background: var(--blue-light);
+        color: var(--blue-dark);
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      @media (max-width: 1000px) {
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          position: static;
+          width: 100%;
+          height: auto;
+        }
+
+        .nav {
+          grid-auto-flow: column;
+          overflow-x: auto;
+        }
+
+        .nav button {
+          white-space: nowrap;
+        }
+
+        .metrics,
+        .two,
+        .three {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .app {
+          padding: 10px;
+        }
+
+        .topbar,
+        .toolbar,
+        .row {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body data-plan="free">
+    <div class="app">
+      <aside class="sidebar panel">
+        <div class="brand">
+          <div class="logo">CS</div>
+          <div>
+            <p class="muted">CreatorVault</p>
+            <h1>Creator Workspace</h1>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav"></nav>
+
+        <div class="sandbox panel">
+          <p class="label">Tester preview</p>
+          <h3 style="margin-top: 6px">Built for real creator workflow</h3>
+          <p class="muted" style="margin-top: 6px">Use this preview to test whether the flow feels easy from product sample to posted content.</p>
+          <div class="mode-toggle" style="margin-top: 12px">
+            <button data-plan="free">Free</button>
+            <button data-plan="pro">Pro</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar panel">
+          <div>
+            <p class="label">Creator content workspace</p>
+            <h2 id="page-title">What We Are</h2>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-jump="Vault">+ Save clip</button>
+            <button class="btn coral" data-jump="Film Batches">Start batch</button>
+            <button class="btn" data-jump="Samples">Track sample</button>
+          </div>
+        </header>
+
+        <div class="tab panel" id="tabs"></div>
+
+        <section class="section active" data-section="What We Are">
+          <div class="panel card">
+            <p class="label">What CreatorVault is</p>
+            <h3 style="margin-top: 6px; font-size: 28px">The calm home base for creators who make more content than they can keep track of.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 850px">CreatorVault connects every product, sample, script, filming session, raw clip, AI clip, edit, post, and result so creators always know what exists, what is ready, and what needs attention next.</p>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Why we exist</p>
+              <h3 style="margin-top: 6px">Because lost content becomes lost income.</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Content finally has one home.</strong><p class="muted">Raw clips, edits, AI assets, captions, and draft backups are saved where the creator can actually find them.</p></div>
+                <div class="card"><strong>Every product keeps its full history.</strong><p class="muted">Sample status, delivery, filming, scripts, clips, posts, and performance stay connected.</p></div>
+                <div class="card"><strong>Great content gets reused.</strong><p class="muted">One strong clip can become a TikTok, Amazon post, Reel, Short, ad, or seasonal repost.</p></div>
+              </div>
+            </div>
+            <div class="panel card">
+              <p class="label">The promise</p>
+              <h3 style="margin-top: 6px">One product. Every asset. Every post. Every result.</h3>
+              <div class="flow" style="margin-top: 14px; grid-template-columns: repeat(3, minmax(130px, 1fr))">
+                <div class="flow-step"><span class="chip">Save</span><strong>Capture before chaos</strong><p class="muted">Store raw, AI, draft, final, and notes.</p></div>
+                <div class="flow-step"><span class="chip">Connect</span><strong>Link to the product</strong><p class="muted">Every asset belongs to a product.</p></div>
+                <div class="flow-step"><span class="chip">Reuse</span><strong>Multiply winners</strong><p class="muted">Turn one idea into many posts.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel card">
+            <p class="label">How to use CreatorVault for max potential</p>
+            <h3 style="margin-top: 6px">Follow this order every time.</h3>
+            <div class="flow" style="margin-top: 14px">
+              <div class="flow-step"><span class="chip">1</span><strong>Add product</strong><p class="muted">Name, platform, link, commission, notes.</p></div>
+              <div class="flow-step"><span class="chip">2</span><strong>Track sample</strong><p class="muted">Approved, shipped, delivered, ready to film.</p></div>
+              <div class="flow-step"><span class="chip">3</span><strong>Plan angle</strong><p class="muted">Hook, script, pain point, CTA, hashtags.</p></div>
+              <div class="flow-step"><span class="chip">4</span><strong>Batch film</strong><p class="muted">Attach every product and missing shot.</p></div>
+              <div class="flow-step"><span class="chip">5</span><strong>Save to Vault</strong><p class="muted">Raw clips, AI clips, exports, backups.</p></div>
+              <div class="flow-step"><span class="chip">6</span><strong>Post and learn</strong><p class="muted">Schedule, track results, reuse winners.</p></div>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="panel card money">
+              <p class="label">Daily habit</p>
+              <h3 style="margin-top: 6px">Open Command Center first.</h3>
+              <p class="muted" style="margin-top: 8px">It tells you what samples need attention, what clips are unfinished, what is ready to post, and what can be reused.</p>
+            </div>
+            <div class="panel card rescue">
+              <p class="label">Golden rule</p>
+              <h3 style="margin-top: 6px">Never leave content in only one app.</h3>
+              <p class="muted" style="margin-top: 8px">If it is in CapCut, TikTok drafts, camera roll, downloads, or an AI tool, log it in the Vault so it has a home.</p>
+            </div>
+            <div class="panel card">
+              <p class="label">Best outcome</p>
+              <h3 style="margin-top: 6px">Every product has a content history.</h3>
+              <p class="muted" style="margin-top: 8px">You can see what you filmed, what you posted, what performed, and what to make next without starting over.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Plans">
+          <div class="panel card">
+            <p class="label">Free and paid version</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Start organized for free. Upgrade when CreatorVault starts saving you real time and content.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 850px">The free plan should help a creator finally get their products, scripts, and posts in one place. The paid plan should feel like the protection layer for serious creators who batch film, use AI clips, work with samples, and cannot afford to lose drafts.</p>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card plan-card">
+              <div>
+                <p class="label">Free</p>
+                <h3 style="margin-top: 6px">Creator Starter</h3>
+                <p class="plan-price">$0</p>
+                <p class="muted">For creators who need one calm place to start tracking content.</p>
+              </div>
+              <ul class="feature-list">
+                <li>Track up to 25 products</li>
+                <li>Basic sample status: requested, shipped, delivered, ready to film</li>
+                <li>Save scripts, hooks, CTAs, and hashtags</li>
+                <li>Simple Post Planner</li>
+                <li>Basic Vault with manual links and notes</li>
+                <li>Basic performance notes</li>
+              </ul>
+              <button class="btn primary" data-jump="Command Center">Use free workspace</button>
+            </div>
+
+            <div class="panel card plan-card money pro-only">
+              <div>
+                <p class="label">Paid</p>
+                <h3 style="margin-top: 6px">CreatorVault Pro</h3>
+                <p class="plan-price">$12/mo</p>
+                <p class="muted">For creators who batch film, sell affiliate products, use AI clips, and need content insurance.</p>
+              </div>
+              <ul class="feature-list">
+                <li>Unlimited products, scripts, batches, and saved assets</li>
+                <li>Mass Import Inbox for camera roll, CapCut exports, AI clips, thumbnails, and voiceovers</li>
+                <li>Crash Rescue Queue for CapCut crashes, TikTok draft loss, missing shots, and refilms</li>
+                <li>Product Workspace that connects sample, script, batch, vault, post, and performance</li>
+                <li>Auto-tag suggestions by product, batch date, source app, and content type</li>
+                <li>Reuse Engine: turn one clip into TikTok, Amazon, Reel, Short, ad, or seasonal repost ideas</li>
+                <li>Advanced performance tracking: clicks, sales, winner notes, and what to remake</li>
+              </ul>
+              <button class="btn coral" data-jump="Vault">Preview Pro Vault</button>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="panel card">
+              <p class="label">Free should feel good</p>
+              <h3 style="margin-top: 6px">No fake product.</h3>
+              <p class="muted" style="margin-top: 8px">A free user can still organize products, scripts, sample status, posts, and notes. They should trust the habit before paying.</p>
+            </div>
+            <div class="panel card rescue pro-only">
+              <p class="label">Paid should feel necessary</p>
+              <h3 style="margin-top: 6px">Protect the messy middle.</h3>
+              <p class="muted" style="margin-top: 8px">The paid plan solves the painful part: scattered raw clips, CapCut exports, AI files, TikTok draft backups, missing shots, and reuse ideas.</p>
+            </div>
+            <div class="panel card money pro-only">
+              <p class="label">Upgrade moment</p>
+              <h3 style="margin-top: 6px">When they batch film.</h3>
+              <p class="muted" style="margin-top: 8px">Once a creator films several products in one day, they need Pro to keep every clip connected and searchable.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="TikTok Connect">
+          <div class="panel card">
+            <p class="label">TikTok account and showcase</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Connect TikTok so CreatorVault can become your product-to-post command center.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 880px">A creator should be able to safely connect their TikTok account, review what CreatorVault can access, and link posted videos or showcased products back to the product workspace where scripts, clips, batches, and results live.</p>
+            <div class="actions" style="margin-top: 14px">
+              <button class="btn primary">Connect TikTok</button>
+              <button class="btn" data-jump="Product Workspace">View connected product</button>
+            </div>
+          </div>
+
+          <div class="panel card money">
+            <p class="label">Account to connect</p>
+            <h3 style="margin-top: 6px">@ericabrooks03</h3>
+            <p class="muted" style="margin-top: 8px">Tester preview account. In the full app, this connection would happen through TikTok's official authorization screen before CreatorVault can show videos, posting data, or showcase matches.</p>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">What the creator approves</p>
+              <h3 style="margin-top: 6px">Permission-based access only</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Profile connection</strong><p class="muted">Confirm the creator account and keep the workspace tied to the right TikTok identity.</p></div>
+                <div class="card"><strong>Video display access</strong><p class="muted">Show selected or recent public TikTok videos inside CreatorVault so posted content can be connected to products.</p></div>
+                <div class="card"><strong>Posting support later</strong><p class="muted">Prepare final videos and captions for TikTok posting workflows when approved API access allows it.</p></div>
+              </div>
+            </div>
+
+            <div class="panel card money">
+              <p class="label">Showcase workflow</p>
+              <h3 style="margin-top: 6px">Turn TikTok Shop chaos into a product list</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Import or confirm showcase products</strong><p class="muted">Creators can connect TikTok Shop products to CreatorVault product workspaces.</p></div>
+                <div class="card"><strong>Match videos to products</strong><p class="muted">Posted videos can be linked to the exact product, script, batch, and final asset used.</p></div>
+                <div class="card"><strong>See what deserves another post</strong><p class="muted">CreatorVault can highlight products with content, missing content, winners, and products that need refilming.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel card">
+            <p class="label">Connected TikTok review</p>
+            <h3 style="margin-top: 6px">What testers should expect</h3>
+            <div class="row table-head"><span>TikTok item</span><span>CreatorVault match</span><span>Status</span><span>Next action</span></div>
+            <div class="row"><strong>Posted product demo<br /><span class="muted">Public TikTok video</span></strong><span>Product Workspace</span><span class="chip">Matched</span><span>Track clicks and sales</span></div>
+            <div class="row"><strong>Showcase product<br /><span class="muted">Affiliate product listing</span></strong><span>Products</span><span class="chip">Needs confirm</span><span>Attach sample and script</span></div>
+            <div class="row"><strong>Draft backup<br /><span class="muted">Caption and final video saved manually</span></strong><span>Vault</span><span class="chip">Protected</span><span>Schedule or reuse</span></div>
+          </div>
+
+          <div class="notice">
+            <strong>Important build note</strong>
+            <p class="muted" style="margin-top: 6px">TikTok account connection must use TikTok's official developer authorization and approved scopes. Full TikTok Shop Showcase automation may require separate TikTok Shop/partner permissions, so the first tester version should support manual confirmation plus future API sync.</p>
+          </div>
+        </section>
+
+        <section class="section" data-section="Command Center">
+          <div class="panel card">
+            <p class="label">Creator flow</p>
+            <h3 style="margin-top: 6px">One place from sample to sale</h3>
+            <div class="flow" style="margin-top: 14px">
+              <div class="flow-step"><span class="chip">1</span><strong>Sample</strong><p class="muted">Approved, shipped, delivered</p></div>
+              <div class="flow-step"><span class="chip">2</span><strong>Plan</strong><p class="muted">Hook, angle, shot list</p></div>
+              <div class="flow-step"><span class="chip">3</span><strong>Batch film</strong><p class="muted">Capture every take</p></div>
+              <div class="flow-step"><span class="chip">4</span><strong>Vault</strong><p class="muted">Raw, AI, drafts, finals</p></div>
+              <div class="flow-step"><span class="chip">5</span><strong>Post</strong><p class="muted">Schedule final videos</p></div>
+              <div class="flow-step"><span class="chip">6</span><strong>Reuse</strong><p class="muted">Remix winners later</p></div>
+            </div>
+          </div>
+
+          <div class="grid metrics">
+            <div class="card metric"><p class="muted">Samples to track</p><strong>3</strong><p class="muted">Approved, shipped, delivered</p></div>
+            <div class="card metric"><p class="muted">Raw clips saved</p><strong>18</strong><p class="muted">Phone, CapCut, TikTok, AI</p></div>
+            <div class="card metric"><p class="muted">Ready to post</p><strong>4</strong><p class="muted">Final edits with captions</p></div>
+            <div class="card metric"><p class="muted">Reuse ideas</p><strong>7</strong><p class="muted">Content worth recycling</p></div>
+          </div>
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Today, start here</p>
+              <h3 style="margin-top: 6px">Creator checklist</h3>
+              <div class="stack" style="margin-top: 14px">
+                <label class="card" style="background: var(--oat)"><input type="checkbox" /> Check sample deliveries and mark anything ready to film</label>
+                <label class="card" style="background: var(--oat)"><input type="checkbox" /> Create one batch film session and attach every product you film</label>
+                <label class="card" style="background: var(--oat)"><input type="checkbox" /> Drop raw clips, AI clips, CapCut exports, and TikTok draft backups into the Vault</label>
+                <label class="card" style="background: var(--oat)"><input type="checkbox" /> Pick final videos for the Post Planner</label>
+              </div>
+            </div>
+            <div class="panel card">
+              <p class="label">Do not lose these</p>
+              <h3 style="margin-top: 6px">Unfinished content</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Raw clips waiting for edit</strong><p class="muted">The product demo is saved, but the final video still needs to be created.</p><span class="chip">Editing</span></div>
+                <div class="card"><strong>AI clip ready to add</strong><p class="muted">Generated intro is saved and waiting to be paired with the product footage.</p><span class="chip">Assemble</span></div>
+                <div class="card"><strong>Missing refilm shot</strong><p class="muted">A closeup or selfie angle is needed before this post is complete.</p><span class="chip">Refilm</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card rescue">
+              <p class="label">Crash rescue</p>
+              <h3 style="margin-top: 6px">Nothing lives only in another app</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>CapCut safety copy</strong><p class="muted">Save final exports and project notes before uploading.</p></div>
+                <div class="card"><strong>TikTok draft backup</strong><p class="muted">Save the caption, product link, thumbnail, and final video outside TikTok.</p></div>
+                <div class="card"><strong>Missing shot list</strong><p class="muted">Selfie zoom, product closeup, voiceover redo, B-roll gap.</p></div>
+              </div>
+            </div>
+            <div class="panel card money">
+              <p class="label">Why creators would pay</p>
+              <h3 style="margin-top: 6px">More posts from the content they already made</h3>
+              <div class="grid three" style="margin-top: 14px">
+                <div class="card metric"><p class="muted">Lost clips saved</p><strong>12</strong></div>
+                <div class="card metric"><p class="muted">Drafts rescued</p><strong>5</strong></div>
+                <div class="card metric"><p class="muted">Reuse value</p><strong>9</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Test & Share">
+          <div class="panel card">
+            <p class="label">Real-time testing</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Use this checklist to test CreatorVault like a real creator.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 880px">Switch between Free and Pro in the sidebar, then click through each workflow. The goal is to confirm the app feels easy, clear, and valuable before publishing.</p>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Free plan test</p>
+              <h3 style="margin-top: 6px">Does the free version build trust?</h3>
+              <div class="stack" style="margin-top: 14px">
+                <label class="card"><input type="checkbox" /> Can a new creator understand what CreatorVault does in under 60 seconds?</label>
+                <label class="card"><input type="checkbox" /> Can they track a product/sample without feeling overwhelmed?</label>
+                <label class="card"><input type="checkbox" /> Can they save a basic script, hook, and post plan?</label>
+                <label class="card"><input type="checkbox" /> Do the Pro labels make them curious instead of annoyed?</label>
+              </div>
+            </div>
+
+            <div class="panel card money">
+              <p class="label">Pro plan test</p>
+              <h3 style="margin-top: 6px">Does Pro feel worth paying for?</h3>
+              <div class="stack" style="margin-top: 14px">
+                <label class="card"><input type="checkbox" /> Does Mass Import feel like a must-have for camera, CapCut, TikTok, and AI clips?</label>
+                <label class="card"><input type="checkbox" /> Does Product Workspace make everything feel connected?</label>
+                <label class="card"><input type="checkbox" /> Does Crash Rescue solve a real frustration?</label>
+                <label class="card"><input type="checkbox" /> Would a creator pay monthly to stop losing content and reuse winners?</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="panel card">
+              <p class="label">How to test locally</p>
+              <h3 style="margin-top: 6px">Use this computer</h3>
+              <p class="muted" style="margin-top: 8px">Keep this server running and open http://localhost:3000. Click every tab and test Free/Pro mode.</p>
+            </div>
+            <div class="panel card">
+              <p class="label">How to share with a friend</p>
+              <h3 style="margin-top: 6px">Publish a preview link</h3>
+              <p class="muted" style="margin-top: 8px">Localhost only works on your computer. To share, publish to Vercel, Netlify, or another host, then send your friend that public URL.</p>
+            </div>
+            <div class="panel card">
+              <p class="label">What to ask testers</p>
+              <h3 style="margin-top: 6px">Listen for confusion</h3>
+              <p class="muted" style="margin-top: 8px">Ask what they would click first, what feels valuable, what feels missing, and whether Pro solves a painful enough problem.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Product Workspace">
+          <div class="panel card">
+            <p class="label">One product home</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Your Product Workspace</h3>
+            <p class="muted" style="margin-top: 8px">Every sample, script, filming session, clip, final edit, post, result, and reuse idea for one product stays connected in this single view.</p>
+            <div class="actions" style="margin-top: 14px">
+              <span class="chip">Affiliate product</span>
+              <span class="chip">Commission tracked</span>
+              <span class="chip">Delivery saved</span>
+              <span class="chip">Ready to film</span>
+            </div>
+          </div>
+
+          <div class="flow">
+            <div class="flow-step"><span class="chip">Sample</span><strong>Delivery tracked</strong><p class="muted">Know when it is ready to film.</p></div>
+            <div class="flow-step"><span class="chip">Script</span><strong>Angles saved</strong><p class="muted">Hooks, pain points, CTA ready.</p></div>
+            <div class="flow-step"><span class="chip">Batch</span><strong>Filming linked</strong><p class="muted">Shot lists and missing shots.</p></div>
+            <div class="flow-step"><span class="chip">Vault</span><strong>Assets attached</strong><p class="muted">Raw, AI, draft, final, reusable.</p></div>
+            <div class="flow-step"><span class="chip">Post</span><strong>Ready to schedule</strong><p class="muted">Final content moves to planner.</p></div>
+            <div class="flow-step"><span class="chip">Reuse</span><strong>Next ideas found</strong><p class="muted">Remix what already works.</p></div>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Connected sample</p>
+              <h3 style="margin-top: 6px">Sample and delivery</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Status</strong><p class="muted">Approved, shipped, delivered, ready to film, or needs follow-up.</p></div>
+                <div class="card"><strong>Delivery notes</strong><p class="muted">Keep tracking, arrival date, sample condition, and first filming idea together.</p></div>
+              </div>
+            </div>
+            <div class="panel card">
+              <p class="label">Connected scripts</p>
+              <h3 style="margin-top: 6px">Angles for this product</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Primary product demo</strong><p class="muted">Main hook, problem, voiceover, on-screen text, CTA, and hashtags.</p><span class="chip">filmed</span></div>
+                <div class="card"><strong>Second angle idea</strong><p class="muted">A fast remix angle for another platform or future post.</p><span class="chip">idea</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Connected batch</p>
+              <h3 style="margin-top: 6px">Connected batch session</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>Shot list completed</strong><p class="muted">Hook, demo, closeup, B-roll, voiceover, AI intro placeholder.</p></div>
+                <div class="card rescue"><strong>Missing shot</strong><p class="muted">Save any refilm needs before they get forgotten.</p></div>
+              </div>
+            </div>
+            <div class="panel card">
+              <p class="label">Connected vault assets</p>
+              <h3 style="margin-top: 6px">Saved content</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card"><strong>AI intro clip</strong><p class="muted">Generated clip saved with the product before editing.</p><span class="chip">AI clip</span></div>
+                <div class="card"><strong>Raw product demo</strong><p class="muted">Camera clip saved before it gets buried in the phone.</p><span class="chip">Raw</span></div>
+                <div class="card"><strong>Captioned final edit</strong><p class="muted">Finished export ready for final review and scheduling.</p><span class="chip">Final</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="panel card money">
+              <p class="label">Connected post plan</p>
+              <h3 style="margin-top: 6px">Final video moves to the planner</h3>
+              <p class="muted" style="margin-top: 8px">Choose the platform, post date, caption, product link, and final asset without hunting through old folders.</p>
+            </div>
+            <div class="panel card">
+              <p class="label">Connected performance</p>
+              <h3 style="margin-top: 6px">Results turn into next actions</h3>
+              <p class="muted" style="margin-top: 8px">Save views, clicks, sales, winning hooks, and what to remake for the next platform.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Samples">
+          <div class="panel card">
+            <p class="label">Sample and delivery tracker</p>
+            <h3 style="margin-top: 6px">From approved sample to ready-to-film</h3>
+            <div class="grid three" style="margin-top: 14px">
+              <div class="card"><strong>Ready-to-film sample</strong><p class="muted">Approved sample has arrived and is connected to its product workspace.</p><span class="chip">Ready to film</span><button class="btn" data-jump="Product Workspace" style="margin-top: 10px">Open workspace</button></div>
+              <div class="card"><strong>In-transit sample</strong><p class="muted">Tracking number and expected delivery date are saved before filming is planned.</p><span class="chip">In transit</span></div>
+              <div class="card"><strong>Filmed sample</strong><p class="muted">Product has raw clips saved and now needs editing or scheduling.</p><span class="chip">Editing</span></div>
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <input class="field" placeholder="Product name" />
+              <input class="field" placeholder="Tracking number or delivery date" />
+              <select class="field"><option>Sample approved</option><option>Shipped</option><option>Delivered</option><option>Ready to film</option><option>Needs follow-up</option></select>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Film Batches">
+          <div class="panel card">
+            <p class="label">Batch filming</p>
+            <h3 style="margin-top: 6px">One session, every clip saved</h3>
+            <div class="grid two" style="margin-top: 14px">
+              <div class="card">
+                <strong>Connected filming batch</strong>
+                <p class="muted">Products, scripts, raw clips, AI clips, and missing shots are grouped together.</p>
+                <p class="muted">Shot list: hook, demo, B-roll, selfie reaction, zoom detail.</p>
+                <div class="actions" style="margin-top: 10px"><span class="chip">18 raw clips</span><span class="chip">3 AI clips</span><span class="chip">4 finals</span></div>
+                <button class="btn" data-jump="Product Workspace" style="margin-top: 10px">Open connected product</button>
+              </div>
+              <div class="card">
+                <strong>Quick capture notes</strong>
+                <p class="muted">Save filming notes, app issues, draft backups, and missing shots before they are forgotten.</p>
+                <textarea class="field" style="margin-top: 10px">Add any missing shot, voiceover, edit note, or platform idea here.</textarea>
+              </div>
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <input class="field" placeholder="Batch name" />
+              <input class="field" placeholder="Products filmed" />
+              <button class="btn coral">Create batch</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Vault">
+          <div class="panel card">
+            <p class="label">Content vault</p>
+            <h3 style="margin-top: 6px">Raw, AI, edited, final, reusable</h3>
+            <div class="notice" style="margin-top: 14px">
+              <strong>Pro tool preview: Mass Import Inbox</strong>
+              <p class="muted" style="margin-top: 6px">Drop in camera clips, CapCut exports, AI videos, voiceovers, and thumbnails. CreatorVault suggests product, batch, source app, and asset type before saving.</p>
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <div class="card"><strong>Raw camera clip</strong><p class="muted">Original footage saved before editing or uploading.</p><span class="chip">Raw</span></div>
+              <div class="card"><strong>AI intro clip</strong><p class="muted">Generated asset saved with the product it supports.</p><span class="chip">AI clip</span><button class="btn" data-jump="Product Workspace" style="margin-top: 10px">Open product</button></div>
+              <div class="card"><strong>Final captioned export</strong><p class="muted">Finished edit ready to move into the Post Planner.</p><span class="chip">Final</span></div>
+              <div class="card"><strong>Reusable moment</strong><p class="muted">A clip worth saving for another post, trend, or platform.</p><span class="chip">Reuse</span></div>
+              <div class="card"><strong>Draft backup note</strong><p class="muted">Caption, product link, sound, and final asset saved outside the posting app.</p><span class="chip">Backup</span></div>
+              <div class="card"><strong>Missing shot reminder</strong><p class="muted">Refilm need saved and attached to the next batch.</p><span class="chip">Needs shot</span></div>
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <input class="field" placeholder="File name or link" />
+              <select class="field"><option>Raw clip</option><option>AI clip</option><option>CapCut export</option><option>TikTok draft backup</option><option>Final video</option><option>Reusable B-roll</option></select>
+              <input class="field" placeholder="Product or batch" />
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <div class="card locked pro-only"><strong>Bulk upload</strong><p class="muted">Add many files at once from phone, desktop, or cloud folder.</p></div>
+              <div class="card locked pro-only"><strong>Auto-sort</strong><p class="muted">Suggest product, batch, raw/final/AI, and missing shot status.</p></div>
+              <div class="card locked pro-only"><strong>Duplicate check</strong><p class="muted">Avoid saving the same CapCut export or camera clip twice.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Products">
+          <div class="panel">
+            <div class="toolbar">
+              <input class="field" id="product-search" placeholder="Search products, brands, categories" />
+              <select class="field" id="platform-filter">
+                <option>All</option>
+                <option>TikTok Shop</option>
+                <option>Amazon</option>
+                <option>Instagram</option>
+              </select>
+              <button class="btn coral">+ Add product</button>
+            </div>
+            <div class="grid three" id="products" style="padding: 0 16px 16px"></div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Scripts">
+          <div class="grid two">
+            <div class="panel card">
+              <p class="label">Create script</p>
+              <h3 style="margin-top: 6px">Builder fields</h3>
+              <div class="stack" style="margin-top: 14px">
+                <input class="field" value="Connected affiliate product" />
+                <input class="field" value="The quick hook that makes someone stop scrolling." />
+                <textarea class="field">Write the voiceover, proof point, product benefit, and creator note here so the clip can be filmed, edited, posted, and reused later.</textarea>
+                <input class="field" value="Short on-screen text that explains the value fast." />
+                <input class="field" value="Clear CTA tied to the product link or next action." />
+                <select class="field"><option>idea</option><option selected>scripted</option><option>filmed</option><option>posted</option></select>
+              </div>
+            </div>
+            <div class="panel card">
+              <p class="label">Script preview</p>
+              <h3 style="margin-top: 6px">Connected script preview</h3>
+              <div class="stack" style="margin-top: 14px">
+                <div class="card" style="background: var(--oat)"><p class="label">Hook</p><p>Save a scroll-stopping opening that connects directly to the product workspace.</p></div>
+                <div class="card" style="background: var(--oat)"><p class="label">Voiceover</p><p>Keep the talking points, benefit, proof, and CTA attached to the clips you film.</p></div>
+                <div class="actions"><span class="chip">#productdemo</span><span class="chip">#affiliatefinds</span><span class="chip">#creatorworkflow</span></div>
+                <button class="btn" data-jump="Product Workspace">Open connected product workspace</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Hooks">
+          <div class="panel card">
+            <input class="field" id="hook-search" placeholder="Search hooks by category or phrase" />
+            <div class="grid two" id="hooks" style="margin-top: 14px"></div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Post Planner">
+          <div class="panel">
+            <div class="row table-head"><span>Final video</span><span>Platform</span><span>Post</span><span>Status</span></div>
+            <div class="row"><strong>Final product demo<br /><span class="muted">Product link added</span></strong><span>Amazon</span><span>Tomorrow</span><span class="chip">Ready</span></div>
+            <div class="row"><strong>AI intro plus demo edit<br /><span class="muted">Needs caption review</span></strong><span>TikTok Shop</span><span>Next post slot</span><span class="chip">Editing</span></div>
+            <div class="row"><strong>Comparison angle<br /><span class="muted">Waiting on refilm shot</span></strong><span>Instagram</span><span>Upcoming</span><span class="chip">Blocked</span></div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Performance">
+          <div class="panel card">
+            <p class="label">Performance insight</p>
+            <h3>Winning product demo</h3>
+            <p class="muted" style="margin-top: 6px">Track what worked, what sold, and which clip should be remade or reused.</p>
+            <div class="grid metrics" style="margin-top: 14px">
+              <div class="card metric"><p class="muted">Views</p><strong>18,400</strong></div>
+              <div class="card metric"><p class="muted">Likes</p><strong>1,210</strong></div>
+              <div class="card metric"><p class="muted">Comments</p><strong>86</strong></div>
+              <div class="card metric"><p class="muted">Clicks</p><strong>342</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="Admin">
+          <div class="panel card">
+            <p class="label">Setup status</p>
+            <h3 style="margin-top: 6px">CreatorVault tester preview is ready</h3>
+            <div class="notice" style="margin-top: 14px">
+              <strong>Next.js install is waiting on package access.</strong>
+              <p class="muted" style="margin-top: 6px">This preview uses the same product, script, hook, calendar, and performance data without downloading packages.</p>
+            </div>
+            <div class="grid three" style="margin-top: 14px">
+              <div class="card"><strong>Database schema</strong><p class="muted">Created in supabase/schema.sql</p></div>
+              <div class="card"><strong>Seed data</strong><p class="muted">Created in supabase/seed.sql</p></div>
+              <div class="card"><strong>Supabase auth</strong><p class="muted">Ready after .env.local keys are added</p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const sections = ["What We Are", "Plans", "Test & Share", "TikTok Connect", "Product Workspace", "Command Center", "Samples", "Film Batches", "Vault", "Products", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
+      const products = [
+        ["Affiliate product ready to film", "Brand saved", "Creator niche", "Amazon", "8.5%", "Ready to film", "Product, sample, clips, scripts, and post plan stay connected."],
+        ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "15%", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."],
+        ["Instagram product concept", "Brand saved", "Creator gear", "Instagram", "12.25%", "Requested", "Track the sample before it arrives so filming does not get forgotten."]
+      ];
+      const hooks = [
+        ["Problem/Solution", "Show the problem first, then make the product feel like the obvious fix."],
+        ["Before/After", "Use the fastest visible transformation from raw moment to finished result."],
+        ["Curiosity", "Open with the detail that makes someone wonder why the product works."],
+        ["Trust", "Explain what you tested before recommending the product."]
+      ];
+
+      const nav = document.querySelector("#nav");
+      const tabs = document.querySelector("#tabs");
+      const title = document.querySelector("#page-title");
+
+      function switchSection(name) {
+        title.textContent = name;
+        document.querySelectorAll("[data-section]").forEach((section) => {
+          section.classList.toggle("active", section.dataset.section === name);
+        });
+        document.querySelectorAll("[data-target]").forEach((button) => {
+          button.classList.toggle("active", button.dataset.target === name);
+        });
+      }
+
+      sections.forEach((section) => {
+        [nav, tabs].forEach((host) => {
+          const button = document.createElement("button");
+          button.textContent = section;
+          button.dataset.target = section;
+          button.className = section === "What We Are" ? "active" : "";
+          button.addEventListener("click", () => switchSection(section));
+          host.appendChild(button);
+        });
+      });
+
+      function renderProducts() {
+        const query = document.querySelector("#product-search").value.toLowerCase();
+        const platform = document.querySelector("#platform-filter").value;
+        const host = document.querySelector("#products");
+        host.innerHTML = "";
+        products
+          .filter((product) => (platform === "All" || product[3] === platform) && product.join(" ").toLowerCase().includes(query))
+          .forEach((product) => {
+            host.insertAdjacentHTML("beforeend", `<article class="card"><p class="label">${product[3]}</p><h3>${product[0]}</h3><p class="muted">${product[1]} - ${product[2]}</p><div class="stack" style="margin-top:12px"><span class="chip">${product[4]}</span><p><strong>Sample:</strong> ${product[5]}</p><p class="muted">${product[6]}</p></div></article>`);
+          });
+      }
+
+      function renderHooks() {
+        const query = document.querySelector("#hook-search").value.toLowerCase();
+        const host = document.querySelector("#hooks");
+        host.innerHTML = "";
+        hooks
+          .filter((hook) => hook.join(" ").toLowerCase().includes(query))
+          .forEach((hook) => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.innerHTML = `<span class="chip">${hook[0]}</span><p style="margin-top:12px;font-size:18px;font-weight:750">${hook[1]}</p><button class="btn" style="margin-top:12px">Copy hook</button>`;
+            card.querySelector("button").addEventListener("click", async (event) => {
+              await navigator.clipboard.writeText(hook[1]);
+              event.currentTarget.textContent = "Copied";
+              setTimeout(() => (event.currentTarget.textContent = "Copy hook"), 1200);
+            });
+            host.appendChild(card);
+          });
+      }
+
+      document.querySelector("#product-search").addEventListener("input", renderProducts);
+      document.querySelector("#platform-filter").addEventListener("change", renderProducts);
+      document.querySelector("#hook-search").addEventListener("input", renderHooks);
+      document.querySelectorAll(".mode-toggle button").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.body.dataset.plan = button.dataset.plan;
+        });
+      });
+      document.querySelectorAll("[data-jump]").forEach((button) => {
+        button.addEventListener("click", () => switchSection(button.dataset.jump));
+      });
+      renderProducts();
+      renderHooks();
+    </script>
+  </body>
+</html>
