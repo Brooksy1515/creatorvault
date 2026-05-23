@@ -1408,7 +1408,7 @@
             <h3 style="margin-top: 6px; font-size: 28px">TikTok first: pull Showcase products, then organize each product workspace.</h3>
             <p class="muted" style="margin-top: 10px; max-width: 880px">CreatorVault can start with TikTok Showcase products. The creator confirms sample status, then every hook, script, clip, post, and result links back to that product workspace.</p>
             <div class="actions" style="margin-top: 14px">
-              <button class="btn primary">Refresh TikTok</button>
+              <button class="btn primary" id="refresh-tiktok">Refresh TikTok</button>
               <button class="btn coral" id="pull-showcase">Pull Showcase Items</button>
               <button class="btn" data-jump="Product Workspace">View connected product</button>
             </div>
@@ -1430,7 +1430,7 @@
 
           <div class="grid three">
             <div class="panel card metric" data-jump="Products"><p class="muted">Videos to organize</p><strong>6</strong><p class="muted">Open products and match videos</p></div>
-            <div class="panel card metric" data-jump="TikTok Connect"><p class="muted">Showcase products</p><strong>9</strong><p class="muted">Ready to connect</p></div>
+            <div class="panel card metric" data-jump="TikTok Connect"><p class="muted">Showcase products</p><strong>6</strong><p class="muted">Ready to connect</p></div>
             <div class="panel card metric" data-jump="Vault"><p class="muted">Draft backups</p><strong>3</strong><p class="muted">Protected in Vault</p></div>
           </div>
 
@@ -1466,19 +1466,19 @@
                 <div class="thumb">RAW</div>
                 <strong>Raw demo clip</strong>
                 <p class="muted">Attach the original phone clip to the product workspace.</p>
-                <div class="actions"><span class="chip">Needs product</span><button class="btn" data-jump="Product Workspace">Attach</button></div>
+                <div class="actions"><span class="chip">Needs product</span><button class="btn" id="attach-raw-demo">Attach</button></div>
               </div>
               <div class="card video-tile">
                 <div class="thumb">AI</div>
                 <strong>AI intro clip</strong>
                 <p class="muted">Attach generated content to the same sample so it does not get lost.</p>
-                <div class="actions"><span class="chip">AI clip</span><button class="btn" data-jump="Vault">Save</button></div>
+                <div class="actions"><span class="chip">AI clip</span><button class="btn" id="attach-ai-demo">Save</button></div>
               </div>
               <div class="card video-tile">
                 <div class="thumb">POST</div>
                 <strong>Posted product video</strong>
                 <p class="muted">Connect the live TikTok post to the product, script, and performance notes.</p>
-                <div class="actions"><span class="chip">Posted</span><button class="btn" data-jump="Performance">Track</button></div>
+                <div class="actions"><span class="chip">Posted</span><button class="btn" id="track-posted-demo">Track</button></div>
               </div>
             </div>
           </div>
@@ -1948,7 +1948,7 @@
                 <option>Amazon</option>
                 <option>Instagram</option>
               </select>
-              <button class="btn coral">+ Add product</button>
+              <button class="btn coral" id="add-product">+ Add product</button>
             </div>
             <div class="grid three" id="products" style="padding: 0 16px 16px"></div>
           </div>
@@ -2259,6 +2259,32 @@
         renderWorkspaceConnections(product);
       }
 
+      function ensureActiveProduct() {
+        const product = getActiveProduct();
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        updateWorkspaceProduct(product);
+        return product;
+      }
+
+      function openSection(name) {
+        if (name === "Product Workspace" || name === "Scripts" || name === "Vault" || name === "Post Planner" || name === "Performance") {
+          ensureActiveProduct();
+        }
+        switchSection(name);
+      }
+
+      function addDemoAssetToActive(name, type, note) {
+        const product = ensureActiveProduct();
+        const records = getProductRecords();
+        const existing = records[productKey(product)]?.assets || [];
+        saveProductRecord(product, {
+          assets: [...existing, { name, type, note }]
+        });
+        updateWorkspaceProduct(product);
+        notify(`${name} saved to ${product.name}.`);
+        return product;
+      }
+
       function selectShowcaseProduct(index) {
         const product = showcaseItems[index];
         localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
@@ -2408,8 +2434,27 @@
         host.innerHTML = "";
         products
           .filter((product) => (platform === "All" || product[3] === platform) && product.join(" ").toLowerCase().includes(query))
-          .forEach((product) => {
-            host.insertAdjacentHTML("beforeend", `<article class="card"><p class="label">${product[3]}</p><h3>${product[0]}</h3><p class="muted">${product[1]} - ${product[2]}</p><div class="stack" style="margin-top:12px"><span class="chip">${product[4]}</span><p><strong>Sample:</strong> ${product[5]}</p><p class="muted">${product[6]}</p></div></article>`);
+          .forEach((product, index) => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.innerHTML = `<p class="label">${product[3]}</p><h3>${product[0]}</h3><p class="muted">${product[1]} - ${product[2]}</p><div class="stack" style="margin-top:12px"><span class="chip">${product[4]}</span><p><strong>Sample:</strong> ${product[5]}</p><p class="muted">${product[6]}</p><button class="btn primary" type="button">Open workspace</button></div>`;
+            card.querySelector("button").addEventListener("click", () => {
+              const matched = product[3] === "TikTok Shop" ? showcaseItems[0] : {
+                name: product[0],
+                brand: product[1],
+                initials: product[0].split(" ").map((word) => word[0]).join("").slice(0, 2).toUpperCase(),
+                category: product[2],
+                commission: product[4],
+                status: product[5],
+                platform: product[3],
+                filmingTask: "Create hook, demo, closeup, B-roll, and CTA for this product.",
+                scriptStarter: "Here is why this product is useful and how I would show it fast."
+              };
+              localStorage.setItem("creatorvault-selected-product", JSON.stringify(matched));
+              updateWorkspaceProduct(matched);
+              openSection("Product Workspace");
+            });
+            host.appendChild(card);
           });
       }
 
@@ -2547,6 +2592,57 @@
       document.querySelector("#file-import")?.addEventListener("change", (event) => {
         renderImportedFiles(event.target.files || []);
       });
+      document.querySelector("#refresh-tiktok")?.addEventListener("click", () => {
+        activateProDemo();
+        renderFullImportDemo();
+        notify("TikTok refreshed. Full demo Showcase is loaded for testing.");
+      });
+      document.querySelector("#attach-raw-demo")?.addEventListener("click", () => {
+        addDemoAssetToActive("Raw demo clip from phone", "Raw camera clip", "Attached from TikTok Connect video matching.");
+        openSection("Product Workspace");
+      });
+      document.querySelector("#attach-ai-demo")?.addEventListener("click", () => {
+        addDemoAssetToActive("AI intro clip", "AI clip", "Saved from AI tools and attached to this product.");
+        openSection("Product Workspace");
+      });
+      document.querySelector("#track-posted-demo")?.addEventListener("click", () => {
+        const product = ensureActiveProduct();
+        const records = getProductRecords();
+        const existing = records[productKey(product)]?.assets || [];
+        saveProductRecord(product, {
+          assets: [...existing, {
+            name: "Posted TikTok product video",
+            type: "Posted video",
+            note: "Ready to track views, clicks, sales, and reuse notes."
+          }]
+        });
+        notify(`Posted video connected to ${product.name}.`);
+        openSection("Performance");
+      });
+      document.querySelector("#add-product")?.addEventListener("click", () => {
+        const count = showcaseItems.length + 1;
+        const product = {
+          name: `New sample product ${count}`,
+          brand: "Tester Brand",
+          initials: `N${count}`,
+          category: "TikTok Shop",
+          commission: "15%",
+          status: "New sample received",
+          platform: "TikTok Shop",
+          filmingTask: "Film hook, product demo, closeup, B-roll, and CTA.",
+          scriptStarter: "I just got this sample in and I am testing whether it is actually worth posting."
+        };
+        showcaseItems.push(product);
+        localStorage.setItem("creatorvault-pro-demo", "true");
+        localStorage.setItem("creatorvault-showcase-pulled", "true");
+        document.body.dataset.plan = "pro";
+        renderShowcaseItems();
+        renderPulledProducts();
+        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
+        updateWorkspaceProduct(product);
+        notify(`${product.name} created and opened.`);
+        openSection("Product Workspace");
+      });
       document.querySelector("#workspace-sample-status")?.addEventListener("change", (event) => {
         const product = getActiveProduct();
         localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
@@ -2601,10 +2697,8 @@
       document.querySelector("#pro-rescue")?.addEventListener("click", buildRescueDemo);
       document.querySelector("#pro-reuse")?.addEventListener("click", generateReuseDemo);
       document.querySelector("#pull-showcase")?.addEventListener("click", () => {
-        localStorage.setItem("creatorvault-showcase-pulled", "true");
-        document.querySelector("#import-status").classList.add("active");
-        renderShowcaseItems();
-        renderPulledProducts();
+        renderFullImportDemo();
+        notify("Full demo Showcase pulled. Open any product to test the full workflow.");
       });
       document.querySelectorAll(".mode-toggle button").forEach((button) => {
         button.addEventListener("click", () => {
@@ -2619,7 +2713,7 @@
         });
       });
       document.querySelectorAll("[data-jump]").forEach((button) => {
-        button.addEventListener("click", () => switchSection(button.dataset.jump));
+        button.addEventListener("click", () => openSection(button.dataset.jump));
       });
       if (localStorage.getItem("creatorvault-pro-demo") === "true") {
         document.body.dataset.plan = "pro";
@@ -2638,6 +2732,8 @@
         const index = showcaseItems.findIndex((item) => item.name === parsed.name);
         if (index >= 0) {
           updateWorkspaceProduct(showcaseItems[index]);
+        } else {
+          updateWorkspaceProduct(parsed);
         }
       }
     </script>
