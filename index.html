@@ -1065,7 +1065,8 @@
         .topbar {
           flex-direction: column;
           align-items: stretch;
-          position: static;
+          position: sticky;
+          top: 8px;
           gap: 12px;
           padding: 14px;
         }
@@ -1247,9 +1248,9 @@
             <h2 id="page-title">Creator Command Center</h2>
           </div>
           <div class="actions">
-            <button class="btn primary" data-jump="Product Workspace">Film</button>
-            <button class="btn coral" data-jump="TikTok Products">Organize</button>
-            <button class="btn" data-jump="Post Planner">Post</button>
+            <button class="btn primary" data-jump="Product List">Product List</button>
+            <button class="btn coral" id="connect-refresh-tiktok">Connect TikTok</button>
+            <button class="btn" data-jump="Product Workspace">Active Workspace</button>
           </div>
         </header>
 
@@ -1266,15 +1267,15 @@
               <span class="chip">TikTok first</span>
             </div>
             <div class="grid metrics" style="margin-top: 16px">
-              <button class="card metric" data-open-product="0"><p class="muted">Overdue videos</p><strong>2</strong><p class="muted">Open product workspace</p></button>
-              <button class="card metric" data-jump="Footage Vault"><p class="muted">Unedited clips</p><strong>18</strong><p class="muted">Raw, AI, CapCut</p></button>
-              <button class="card metric" data-jump="Post Planner"><p class="muted">Ready to post</p><strong>4</strong><p class="muted">Final edits waiting</p></button>
+              <button class="card metric" data-jump="Product List"><p class="muted">Free tracking</p><strong>10</strong><p class="muted">Products included</p></button>
+              <button class="card metric" data-jump="Product Workspace"><p class="muted">Product workspace</p><strong>1</strong><p class="muted">Everything tied together</p></button>
+              <button class="card metric" data-jump="Product List"><p class="muted">Pro tracking</p><strong>Unlimited</strong><p class="muted">Full showcase</p></button>
               <button class="card metric" data-jump="Performance"><p class="muted">Best hook</p><strong>8 words</strong><p class="muted">Curiosity wins</p></button>
             </div>
             <div class="actions" style="margin-top: 16px">
-              <button class="btn primary" data-open-product="0">Film next product</button>
-              <button class="btn coral" data-jump="Footage Vault">Organize footage</button>
-              <button class="btn" data-jump="Post Planner">Post today</button>
+              <button class="btn primary" data-open-product="0">Open next product</button>
+              <button class="btn coral" data-jump="Product List">View product list</button>
+              <button class="btn" data-jump="Product Workspace">Save footage or script</button>
             </div>
           </div>
 
@@ -1305,9 +1306,9 @@
           <div class="panel card">
             <div class="workspace-section-title">
               <div>
-                <p class="label">Products that need footage</p>
-                <h3 style="margin-top: 6px">Start from the product, then everything saves back there.</h3>
-                <p class="muted" style="margin-top: 6px">Each product opens one workspace for footage, on-screen hooks, voiceovers, captions, tags, scripts, and final posts.</p>
+                <p class="label">Today's priorities</p>
+                <h3 style="margin-top: 6px">Products marked Needs Content show here.</h3>
+                <p class="muted" style="margin-top: 6px">Change a product status in the workspace. Free shows up to 5 priority products. Pro shows unlimited priorities.</p>
               </div>
             </div>
             <div class="grid three" id="footage-products" style="margin-top: 14px">
@@ -1317,10 +1318,10 @@
 
           <div class="grid three">
             <div class="panel card">
-              <p class="label">Footage vault</p>
-              <h3 style="margin-top: 6px">Find clips before they disappear.</h3>
-              <p class="muted" style="margin-top: 8px">Search product shots, B-roll, AI clips, CapCut exports, and final videos by product or content type.</p>
-              <button class="btn coral" data-jump="Footage Vault" style="margin-top: 12px">Open vault</button>
+              <p class="label">Product-first footage</p>
+              <h3 style="margin-top: 6px">No separate vault to hunt through.</h3>
+              <p class="muted" style="margin-top: 8px">Camera clips, CapCut exports, AI clips, and final videos are saved inside the product workspace where they belong.</p>
+              <button class="btn coral" data-jump="Product List" style="margin-top: 12px">Choose product</button>
             </div>
             <div class="panel card">
               <p class="label">Film mode</p>
@@ -1350,7 +1351,7 @@
             <div class="limit-grid" style="margin-top: 14px">
               <div class="limit-cell"><p class="muted">Free products</p><strong>10</strong><p class="muted">Manual products or samples</p></div>
               <div class="limit-cell"><p class="muted">Free videos/assets</p><strong>30</strong><p class="muted">Raw clips, AI clips, finals</p></div>
-              <div class="limit-cell"><p class="muted">Free TikTok pull</p><strong>3</strong><p class="muted">Showcase items to test</p></div>
+              <div class="limit-cell"><p class="muted">Free product tracking</p><strong>10</strong><p class="muted">Showcase products to test</p></div>
               <div class="limit-cell money pro-only"><p class="muted">Pro products</p><strong>Unlimited</strong><p class="muted">Full TikTok Showcase import</p></div>
               <div class="limit-cell money pro-only"><p class="muted">Pro videos/assets</p><strong>Unlimited</strong><p class="muted">Camera, CapCut, AI, posted videos</p></div>
               <div class="limit-cell money pro-only"><p class="muted">Pro matching</p><strong>Auto</strong><p class="muted">Match videos to products/scripts</p></div>
@@ -1527,7 +1528,7 @@
           <div class="grid three">
             <div class="panel card metric" data-jump="Products"><p class="muted">Videos to organize</p><strong>6</strong><p class="muted">Open products and match videos</p></div>
             <div class="panel card metric" data-jump="TikTok Connect"><p class="muted">Showcase products</p><strong>6</strong><p class="muted">Ready to connect</p></div>
-            <div class="panel card metric" data-jump="Vault"><p class="muted">Draft backups</p><strong>3</strong><p class="muted">Protected in Vault</p></div>
+            <div class="panel card metric" data-jump="Product Workspace"><p class="muted">Draft backups</p><strong>3</strong><p class="muted">Protected in product workspace</p></div>
           </div>
 
           <div class="panel card">
@@ -1549,7 +1550,7 @@
               <div class="card hub-card" data-jump="Product Workspace"><span class="chip">Product</span><strong>Sample status</strong><p class="muted">Mark new sample, received, filmed, or posted.</p></div>
               <div class="card hub-card" data-jump="Hooks"><span class="chip">Hooks</span><strong>Reusable hooks</strong><p class="muted">Save hooks once and attach them to products.</p></div>
               <div class="card hub-card" data-jump="Scripts"><span class="chip">Scripts</span><strong>Product scripts</strong><p class="muted">Build TikTok scripts tied to the workspace.</p></div>
-              <div class="card hub-card" data-jump="Vault"><span class="chip">Vault</span><strong>Clips and files</strong><p class="muted">Raw, AI, final, draft backups, and notes.</p></div>
+              <div class="card hub-card" data-jump="Product Workspace"><span class="chip">Footage</span><strong>Product footage</strong><p class="muted">Raw, AI, final, draft backups, and notes.</p></div>
               <div class="card hub-card" data-jump="Performance"><span class="chip">Results</span><strong>Posted videos</strong><p class="muted">Track and reuse what works.</p></div>
             </div>
           </div>
@@ -1644,7 +1645,7 @@
                 <h3>Exports and notes</h3>
                 <p class="muted" style="margin-top: 6px">Save final exports, edit notes, captions, and draft backup details.</p>
               </div>
-              <button class="btn" data-jump="Vault">Add CapCut export</button>
+              <button class="btn" data-jump="Product Workspace">Add CapCut export</button>
             </article>
 
             <article class="panel card source-card">
@@ -1704,7 +1705,7 @@
 
           <div class="grid metrics">
             <div class="card metric" data-jump="Samples"><p class="muted">Samples to track</p><strong>3</strong><p class="muted">Approved, shipped, delivered</p></div>
-            <div class="card metric" data-jump="Vault"><p class="muted">Raw clips saved</p><strong>18</strong><p class="muted">Phone, CapCut, TikTok, AI</p></div>
+            <div class="card metric" data-jump="Product Workspace"><p class="muted">Product clips saved</p><strong>18</strong><p class="muted">Phone, CapCut, TikTok, AI</p></div>
             <div class="card metric" data-jump="Post Planner"><p class="muted">Ready to post</p><strong>4</strong><p class="muted">Final edits with captions</p></div>
             <div class="card metric" data-jump="Performance"><p class="muted">Reuse ideas</p><strong>7</strong><p class="muted">Content worth recycling</p></div>
           </div>
@@ -1744,8 +1745,8 @@
               <p class="label">Why creators would pay</p>
               <h3 style="margin-top: 6px">More posts from the content they already made</h3>
               <div class="grid three" style="margin-top: 14px">
-                <div class="card metric" data-jump="Vault"><p class="muted">Lost clips saved</p><strong>12</strong></div>
-                <div class="card metric" data-jump="Vault"><p class="muted">Drafts rescued</p><strong>5</strong></div>
+                <div class="card metric" data-jump="Product Workspace"><p class="muted">Lost clips saved to products</p><strong>12</strong></div>
+                <div class="card metric" data-jump="Product Workspace"><p class="muted">Drafts rescued</p><strong>5</strong></div>
                 <div class="card metric" data-jump="Performance"><p class="muted">Reuse value</p><strong>9</strong></div>
               </div>
             </div>
@@ -1836,9 +1837,10 @@
                     <option>Showcase product only</option>
                     <option>New sample requested</option>
                     <option>New sample received</option>
+                    <option>Needs content</option>
                     <option>Needs TikTok content</option>
                     <option>Filmed</option>
-                    <option>Posted</option>
+                    <option>Content posted</option>
                   </select>
                 </label>
               </div>
@@ -1879,7 +1881,7 @@
             <div class="panel card" id="workspace-footage">
               <p class="label">Product footage</p>
               <h3 style="margin-top: 6px">Camera, CapCut, AI clips, and final exports live here.</h3>
-              <p class="muted" style="margin-top: 8px">Add anything you may need again later. Use the note field for where the file is saved or how you want to reuse it.</p>
+              <p class="muted" style="margin-top: 8px">Add anything you may need again later from camera, CapCut, TikTok drafts, AI tools, or any other app. It stays tied to this product for easy finding and reuse.</p>
               <div class="stack" style="margin-top: 14px">
                 <label class="btn primary">
                   Upload camera or CapCut files
@@ -1890,6 +1892,7 @@
                   <option>Raw camera clip</option>
                   <option>CapCut export</option>
                   <option>AI clip</option>
+                  <option>Other app footage</option>
                   <option>Final video</option>
                   <option>TikTok draft backup</option>
                   <option>Reusable B-roll</option>
@@ -1907,7 +1910,7 @@
             <div class="hub-grid" style="margin-top: 14px">
               <button class="card hub-card" data-scroll-to="workspace-ideas"><span class="chip">Hooks</span><strong>Save hooks and tags</strong><p class="muted">Reusable wording for this product.</p></button>
               <button class="card hub-card" data-scroll-to="workspace-ideas"><span class="chip">Scripts</span><strong>Create product script</strong><p class="muted">Voiceover, CTA, proof, tags.</p></button>
-              <button class="card hub-card" data-scroll-to="workspace-footage"><span class="chip">Footage</span><strong>Add videos</strong><p class="muted">Camera, CapCut, AI, final exports.</p></button>
+              <button class="card hub-card" data-scroll-to="workspace-footage"><span class="chip">Footage</span><strong>Add videos</strong><p class="muted">Camera, CapCut, AI, any app footage, final exports.</p></button>
               <button class="card hub-card" data-jump="Post Planner"><span class="chip">Post</span><strong>Plan TikTok post</strong><p class="muted">Date, status, caption, product link.</p></button>
               <button class="card hub-card" data-jump="Performance"><span class="chip">Results</span><strong>Track performance</strong><p class="muted">Views, clicks, sales, reuse notes.</p></button>
             </div>
@@ -1918,7 +1921,7 @@
             <h3 style="margin-top: 6px">Make this workspace do more of the organizing for you.</h3>
             <p class="muted" style="margin-top: 8px">Free lets you save manually. Pro helps match clips, catch missing work, and create more TikToks from the footage you already filmed.</p>
             <div class="value-grid" style="margin-top: 14px">
-              <button class="value-card" id="workspace-pro-match"><span class="chip">Pro</span><strong style="display:block;margin-top:10px">Auto-match footage</strong><p class="muted" style="margin-top:6px">Attach camera, CapCut, AI, and final clips to this product.</p></button>
+              <button class="value-card" id="workspace-pro-match"><span class="chip">Pro</span><strong style="display:block;margin-top:10px">Auto-match footage</strong><p class="muted" style="margin-top:6px">Attach camera, CapCut, AI, and any app clips to this product.</p></button>
               <button class="value-card" id="workspace-pro-rescue"><span class="chip">Pro</span><strong style="display:block;margin-top:10px">Find missing pieces</strong><p class="muted" style="margin-top:6px">Create a rescue list for drafts, exports, and refilms.</p></button>
               <button class="value-card" id="workspace-pro-reuse"><span class="chip">Pro</span><strong style="display:block;margin-top:10px">Generate reuse ideas</strong><p class="muted" style="margin-top:6px">Turn this product into more TikTok angles.</p></button>
               <button class="value-card" data-jump="Upgrade"><span class="chip">Upgrade</span><strong style="display:block;margin-top:10px">See all Pro tools</strong><p class="muted" style="margin-top:6px">Preview the paid workflow.</p></button>
@@ -1957,6 +1960,17 @@
               <p class="muted" style="margin-top: 8px">Save views, clicks, sales, winning hooks, and what to remake for the next platform.</p>
             </div>
           </div>
+
+          <div class="panel card">
+            <div class="workspace-section-title">
+              <div>
+                <p class="label">Done with this product?</p>
+                <h3 style="margin-top: 6px">Go back to the product list.</h3>
+                <p class="muted" style="margin-top: 6px">Pick the next product that needs content or refresh your TikTok Showcase.</p>
+              </div>
+              <button class="btn primary" data-jump="Product List">Back to Product List</button>
+            </div>
+          </div>
         </section>
 
         <section class="section" data-section="Samples">
@@ -1966,7 +1980,7 @@
             <div class="grid three" style="margin-top: 14px">
               <div class="card"><strong>Ready-to-film sample</strong><p class="muted">Approved sample has arrived and is connected to its product workspace.</p><span class="chip">Ready to film</span><button class="btn" data-jump="Product Workspace" style="margin-top: 10px">Open workspace</button></div>
               <div class="card"><strong>In-transit sample</strong><p class="muted">Tracking number and expected delivery date are saved before filming is planned.</p><span class="chip">In transit</span></div>
-              <div class="card"><strong>Filmed sample</strong><p class="muted">Product has raw clips saved and now needs editing or scheduling.</p><span class="chip">Editing</span></div>
+              <div class="card"><strong>Filmed sample</strong><p class="muted">Product has Product clips saved and now needs editing or scheduling.</p><span class="chip">Editing</span></div>
             </div>
             <div class="grid three" style="margin-top: 14px">
               <input class="field" placeholder="Product name" />
@@ -2041,8 +2055,8 @@
               <div class="workspace-section-title">
                 <div>
                   <p class="label">Free vs Pro</p>
-                  <strong>Free shows 3 products. Pro unlocks the full Showcase workflow.</strong>
-                  <p class="muted" style="margin-top: 6px">Use Free to test the habit. Upgrade when you need all products, batch footage, auto-match, rescue, and reuse tools.</p>
+                  <strong>Free tracks 10 products. Pro unlocks unlimited Showcase workspaces.</strong>
+                  <p class="muted" style="margin-top: 6px">Use Free to test the habit. Upgrade when you need the full product list, unlimited priorities, batch footage, auto-match, rescue, and reuse tools.</p>
                 </div>
                 <button class="btn coral" data-jump="Upgrade">See Pro</button>
               </div>
@@ -2148,7 +2162,7 @@
     </div>
 
     <script>
-      const sections = ["Command Center", "TikTok Products", "Footage Vault", "Upgrade"];
+      const sections = ["Command Center", "Product List", "Upgrade"];
       const hiddenSections = ["Plans", "Test & Share", "Import Hub", "TikTok Connect", "Creator Flow", "Samples", "Filming", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
       const products = [
         ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."]
@@ -2159,7 +2173,7 @@
           brand: "Sample Brand",
           initials: "HM",
           category: "Beauty / Lifestyle",
-          status: "Sample delivered",
+          status: "Needs content",
           platform: "TikTok Shop",
           filmingTask: "Film a 15-second problem/solution demo with one closeup and one reaction shot.",
           scriptStarter: "I did not expect this to make my routine easier, but this is the part that changed everything."
@@ -2169,7 +2183,7 @@
           brand: "Home Sample",
           initials: "CO",
           category: "Home / Daily Use",
-          status: "Needs filming",
+          status: "Needs content",
           platform: "TikTok Shop",
           filmingTask: "Film unboxing, first use, before/after, and a clear CTA ending.",
           scriptStarter: "If you have been putting off this tiny upgrade, this is the easiest way to start."
@@ -2299,7 +2313,12 @@
       function visibleShowcaseItems() {
         return isProPlan()
           ? showcaseItems
-          : showcaseItems.slice(0, 3);
+          : showcaseItems.slice(0, 10);
+      }
+
+      function productStatus(product) {
+        const record = getProductRecords()[productKey(product)] || {};
+        return record.status || product.status;
       }
 
       function scriptCard(script, index) {
@@ -2391,7 +2410,8 @@
 
       function normalizeSectionName(name) {
         if (name === "Today" || name === "Products that need footage") return "Command Center";
-        if (name === "Footage Vault") return "Vault";
+        if (name === "Product List") return "Products";
+        if (name === "Footage Vault" || name === "Vault") return "Product Workspace";
         if (name === "Help") return "What We Are";
         if (name === "TikTok Products") name = "Products";
         if (name === "Upgrade") name = "Pro Demo";
@@ -2423,20 +2443,24 @@
       function renderFootageProducts() {
         const host = document.querySelector("#footage-products");
         if (!host) return;
-        const priorityStatuses = ["Sample delivered", "Needs filming", "Needs TikTok content", "New sample received"];
-        const items = visibleShowcaseItems().filter((item) => priorityStatuses.includes(item.status));
+        const priorityStatuses = ["Needs content", "Needs TikTok content", "Needs filming", "New sample received", "Sample delivered"];
+        const limit = isProPlan() ? Infinity : 5;
+        const items = visibleShowcaseItems()
+          .filter((item) => priorityStatuses.includes(productStatus(item)))
+          .slice(0, limit);
         host.innerHTML = items.map((item) => {
           const index = showcaseItems.findIndex((product) => product.name === item.name);
+          const status = productStatus(item);
           return `
             <button class="card hub-card" type="button" data-open-product="${index}">
               <div class="product-photo">${escapeHtml(item.initials)}</div>
-              <span class="chip">${escapeHtml(item.status)}</span>
+              <span class="chip">${escapeHtml(status)}</span>
               <strong style="display:block;margin-top:10px">${escapeHtml(item.name)}</strong>
               <p class="muted" style="margin-top:6px">${escapeHtml(item.filmingTask)}</p>
               <span class="btn primary" style="margin-top:12px">Open workspace</span>
             </button>
           `;
-        }).join("");
+        }).join("") || `<div class="notice"><strong>No priority products yet.</strong><p class="muted" style="margin-top:6px">Open any product and change its status to Needs content to place it here.</p></div>`;
       }
 
       function addDemoAssetToActive(name, type, note) {
@@ -2514,7 +2538,7 @@
             </div>
             <div class="sample-meta">
               <span class="chip">${item.platform}</span>
-              <span class="chip">${item.status}</span>
+              <span class="chip">${escapeHtml(productStatus(item))}</span>
             </div>
             <button class="btn primary" type="button">Organize this sample</button>
           `;
@@ -2546,7 +2570,7 @@
               <p class="muted" style="margin-top: 6px">${item.category}</p>
             </div>
             <div class="sample-meta">
-              <span class="chip">${item.status}</span>
+              <span class="chip">${escapeHtml(productStatus(item))}</span>
             </div>
             <button class="btn primary" type="button">Open workspace</button>
           `;
@@ -2557,7 +2581,7 @@
         const upgrade = document.createElement("div");
         upgrade.className = "notice pro-only";
         upgrade.style.marginTop = "14px";
-        upgrade.innerHTML = `<strong>Pro unlocks full showcase import.</strong><p class="muted" style="margin-top: 6px">Free lets you test with 3 pulled products. Pro pulls and organizes your whole TikTok Showcase.</p>`;
+        upgrade.innerHTML = `<strong>Pro unlocks unlimited showcase workspaces.</strong><p class="muted" style="margin-top: 6px">Free lets you track 10 products. Pro pulls and organizes your whole TikTok Showcase.</p>`;
         host.appendChild(upgrade);
       }
 
@@ -2610,12 +2634,12 @@
       }
 
       function switchSection(name) {
-        title.textContent = name === "What We Are" ? "Help" : name === "Products" ? "TikTok Products" : name === "Vault" ? "Footage Vault" : name === "Pro Demo" ? "Upgrade" : name;
+        title.textContent = name === "What We Are" ? "Help" : name === "Products" ? "Product List" : name === "Pro Demo" ? "Upgrade" : name;
         document.querySelectorAll("[data-section]").forEach((section) => {
           section.classList.toggle("active", section.dataset.section === name);
         });
         document.querySelectorAll("[data-target]").forEach((button) => {
-          button.classList.toggle("active", button.dataset.target === name || (name === "Products" && button.dataset.target === "TikTok Products") || (name === "Vault" && button.dataset.target === "Footage Vault") || (name === "Pro Demo" && button.dataset.target === "Upgrade") || (name === "What We Are" && button.dataset.target === "Help"));
+          button.classList.toggle("active", button.dataset.target === name || (name === "Products" && (button.dataset.target === "TikTok Products" || button.dataset.target === "Product List")) || (name === "Pro Demo" && button.dataset.target === "Upgrade") || (name === "What We Are" && button.dataset.target === "Help"));
         });
         document.querySelector(".main")?.scrollIntoView({ behavior: "auto", block: "start" });
         window.scrollTo({ top: 0, behavior: "auto" });
@@ -2804,9 +2828,19 @@
         notify("TikTok refreshed. Full demo Showcase is loaded for testing.");
       });
       document.querySelector("#refresh-tiktok-products")?.addEventListener("click", () => {
-        activateProDemo();
+        localStorage.setItem("creatorvault-showcase-pulled", "true");
         renderPulledProducts();
+        renderFootageProducts();
         notify("TikTok Showcase refreshed. Pick a product to open its workspace.");
+      });
+      document.querySelector("#connect-refresh-tiktok")?.addEventListener("click", (event) => {
+        localStorage.setItem("creatorvault-showcase-pulled", "true");
+        renderFootageProducts();
+        renderShowcaseItems();
+        renderPulledProducts();
+        event.currentTarget.textContent = "Refresh TikTok";
+        notify("TikTok Showcase connected. Product List is ready.");
+        openSection("Products");
       });
       document.querySelector("#attach-raw-demo")?.addEventListener("click", () => {
         addDemoAssetToActive("Raw demo clip from phone", "Raw camera clip", "Attached from TikTok Connect video matching.");
@@ -2897,40 +2931,4 @@
         });
         document.querySelector("#workspace-asset-name").value = "";
         document.querySelector("#workspace-asset-note").value = "";
-        updateWorkspaceProduct(product);
-        showLocalStatus("#workspace-asset-status", `${name} saved to ${product.name}. It is now in Saved footage.`);
-        notify(`${name} saved under ${product.name}.`);
-      });
-      document.querySelector("#workspace-file-import")?.addEventListener("change", (event) => {
-        const product = ensureActiveProduct();
-        const records = getProductRecords();
-        const existing = records[productKey(product)]?.assets || [];
-        const imported = Array.from(event.target.files || []).map((file) => ({
-          name: file.name,
-          type: file.type?.startsWith("video") ? "Uploaded video" : file.type?.startsWith("image") ? "Uploaded image" : "Uploaded file",
-          note: `${(file.size / 1024 / 1024).toFixed(1)} MB uploaded from camera, CapCut, AI, or downloads.`
-        }));
-        if (!imported.length) return;
-        saveProductRecord(product, { assets: [...existing, ...imported] });
-        updateWorkspaceProduct(product);
-        showLocalStatus("#workspace-asset-status", `${imported.length} file(s) saved to ${product.name}.`);
-        notify(`${imported.length} file(s) saved to ${product.name}.`);
-      });
-      document.addEventListener("click", async (event) => {
-        const productButton = event.target.closest("[data-open-product]");
-        if (productButton) {
-          selectShowcaseProduct(Number(productButton.dataset.openProduct));
-          return;
-        }
-
-        const copyButton = event.target.closest("[data-copy-script]");
-        if (copyButton) {
-          const index = Number(copyButton.dataset.copyScript);
-          const product = ensureActiveProduct();
-          const record = getProductRecords()[productKey(product)] || {};
-          const script = (record.scripts || [])[index];
-          const text = script
-            ? [
-              `On-screen hook: ${script.hook || script.onScreenHook || ""}`,
-              `Voiceover: ${script.voiceover || ""}`,
-              `Summary / caption
+      
