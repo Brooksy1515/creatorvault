@@ -1291,7 +1291,7 @@
               <h3 style="margin-top: 6px">Samples waiting for content</h3>
               <div class="stack" style="margin-top: 14px">
                 <button class="card hub-card" onclick="selectShowcaseProduct(0)"><span class="chip">Delivered</span><strong>Hydrating Facial Mist Sprayer</strong><p class="muted">Needs first TikTok demo and closeup.</p></button>
-                <button class="card hub-card" onclick="selectShowcaseProduct(1)"><span class="chip">Needs filming</span><strong>Countertop Storage Organizer</strong><p class="muted">High commission. Needs filming plan.</p></button>
+                <button class="card hub-card" onclick="selectShowcaseProduct(1)"><span class="chip">Needs filming</span><strong>Countertop Storage Organizer</strong><p class="muted">Needs filming plan and saved footage.</p></button>
               </div>
             </div>
             <div class="panel card money">
@@ -1336,7 +1336,7 @@
                 <li>Save up to 30 videos/assets</li>
                 <li>Pull 3 TikTok Showcase items for testing</li>
                 <li>Create product workspaces manually</li>
-                <li>Save scripts, hooks, CTAs, hashtags, and notes</li>
+                <li>Save up to 2 scripts per product plus hooks, CTAs, hashtags, and notes</li>
                 <li>Basic Post Planner and performance notes</li>
               </ul>
               <button class="btn primary" data-jump="Command Center">Use free workspace</button>
@@ -1400,7 +1400,7 @@
               <p class="plan-price">$0</p>
               <ul class="feature-list" style="margin-top: 12px">
                 <li>Organize 3 TikTok Showcase products</li>
-                <li>Save hooks, scripts, tags, and basic footage notes</li>
+                <li>Save up to 2 scripts per product plus hooks, tags, and basic footage notes</li>
                 <li>Use one product workspace at a time</li>
                 <li>Manual clip/file organization</li>
               </ul>
@@ -1411,7 +1411,7 @@
               <p class="plan-price">$12/mo</p>
               <ul class="feature-list" style="margin-top: 12px">
                 <li>Full TikTok Showcase import when API access is approved</li>
-                <li>Unlimited product workspaces and saved footage</li>
+                <li>Unlimited scripts per product, product workspaces, and saved footage</li>
                 <li>Auto-match camera, CapCut, AI, final videos, and scripts</li>
                 <li>Batch import, crash rescue, duplicate checks, and reuse ideas</li>
               </ul>
@@ -1778,15 +1778,18 @@
                 <p id="workspace-description" class="muted" style="margin-top: 10px">Pull TikTok Showcase items, pick the real sample/product, then everything for that product lives here.</p>
                 <div class="actions" style="margin-top: 14px">
                   <span class="chip" id="workspace-platform">TikTok product</span>
-                  <span class="chip" id="workspace-commission">Commission</span>
                   <span class="chip" id="workspace-delivery">Sample status</span>
                 </div>
                 <div class="stack" style="margin-top: 16px">
-                  <span class="label">Quick add script</span>
-                  <input class="field" id="quick-hook-input" placeholder="Hook for this product" />
-                  <textarea class="field" id="quick-script-input" style="min-height: 58px" placeholder="Script, voiceover, CTA, proof, tags"></textarea>
-                  <button class="btn primary" id="quick-save-idea">Save script to this product</button>
+                  <span class="label">Quick save script set</span>
+                  <p class="muted">Each saved set keeps its own on-screen hook, voiceover, caption, and tags. Free saves 2 per product. Pro saves unlimited.</p>
+                  <input class="field" id="quick-hook-input" placeholder="On-screen hook" />
+                  <textarea class="field" id="quick-script-input" style="min-height: 58px" placeholder="Voiceover" ></textarea>
+                  <textarea class="field" id="quick-caption-input" style="min-height: 58px" placeholder="Summary / caption" ></textarea>
+                  <input class="field" id="quick-tags-input" placeholder="Tags, hashtags, keywords" />
+                  <button class="btn primary" id="quick-save-idea">Save as a new script set</button>
                   <div class="save-status" id="quick-idea-status">Script saved to this product.</div>
+                  <div class="stack" id="quick-script-preview"></div>
                 </div>
                 <div class="actions" style="margin-top: 18px">
                   <button class="btn primary" data-scroll-to="workspace-footage">Add footage</button>
@@ -1829,9 +1832,10 @@
               <h3 style="margin-top: 6px">Add reusable wording.</h3>
               <p class="muted" style="margin-top: 8px">Save hooks, script notes, CTAs, and tags for this exact product.</p>
               <div class="stack" style="margin-top: 14px">
-                <input class="field" id="workspace-hook-input" placeholder="Hook that stops the scroll" />
+                <input class="field" id="workspace-hook-input" placeholder="On-screen hook" />
                 <textarea class="field" id="workspace-script-input" placeholder="Voiceover, script, talking points, proof, CTA"></textarea>
-                <input class="field" id="workspace-tags-input" placeholder="#tiktokshop #affiliatefinds #productdemo" />
+                <textarea class="field" id="workspace-caption-input" placeholder="Summary / caption for the post"></textarea>
+                <input class="field" id="workspace-tags-input" placeholder="Tags, hashtags, keywords" />
                 <button class="btn primary" id="save-workspace-idea">Save to this product</button>
                 <div class="save-status" id="workspace-idea-status">Saved to this product.</div>
                 <div class="stack" id="workspace-idea-preview"></div>
@@ -2030,18 +2034,19 @@
               <h3 style="margin-top: 6px">Builder fields</h3>
               <div class="stack" style="margin-top: 14px">
                 <input class="field" id="script-product" value="Connected affiliate product" />
-                <input class="field" id="script-hook" value="The quick hook that makes someone stop scrolling." />
+                <input class="field" id="script-hook" value="On-screen hook that makes someone stop scrolling." />
                 <textarea class="field" id="script-voiceover">Write the voiceover, proof point, product benefit, and creator note here so the clip can be filmed, edited, posted, and reused later.</textarea>
-                <input class="field" id="script-onscreen" value="Short on-screen text that explains the value fast." />
-                <input class="field" id="script-cta" value="Clear CTA tied to the product link or next action." />
+                <textarea class="field" id="script-onscreen">Summary or caption for the post.</textarea>
+                <input class="field" id="script-cta" value="#tiktokshop #affiliatefinds #productdemo" />
                 <select class="field" id="script-status"><option>idea</option><option selected>scripted</option><option>filmed</option><option>posted</option></select>
                 <button class="btn primary" id="save-script">Save script to active product</button>
+                <p class="muted">Saved scripts appear in the product workspace where you can copy or edit them later.</p>
               </div>
             </div>
             <div class="panel card">
               <p class="label">Script preview</p>
               <h3 style="margin-top: 6px">Connected script preview</h3>
-              <div class="stack" style="margin-top: 14px">
+              <div class="stack" id="script-builder-preview" style="margin-top: 14px">
                 <div class="card" style="background: var(--oat)"><p class="label">Hook</p><p>Save a scroll-stopping opening that connects directly to the product workspace.</p></div>
                 <div class="card" style="background: var(--oat)"><p class="label">Voiceover</p><p>Keep the talking points, benefit, proof, and CTA attached to the clips you film.</p></div>
                 <div class="actions"><span class="chip">#productdemo</span><span class="chip">#affiliatefinds</span><span class="chip">#creatorworkflow</span></div>
@@ -2112,7 +2117,7 @@
       const sections = ["Today", "TikTok Products", "Upgrade", "Help"];
       const hiddenSections = ["Plans", "Test & Share", "Import Hub", "TikTok Connect", "Command Center", "Samples", "Filming", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
       const products = [
-        ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "15%", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."]
+        ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."]
       ];
       const showcaseItems = [
         {
@@ -2120,7 +2125,6 @@
           brand: "Sample Brand",
           initials: "HM",
           category: "Beauty / Lifestyle",
-          commission: "18%",
           status: "Sample delivered",
           platform: "TikTok Shop",
           filmingTask: "Film a 15-second problem/solution demo with one closeup and one reaction shot.",
@@ -2131,7 +2135,6 @@
           brand: "Home Sample",
           initials: "CO",
           category: "Home / Daily Use",
-          commission: "22%",
           status: "Needs filming",
           platform: "TikTok Shop",
           filmingTask: "Film unboxing, first use, before/after, and a clear CTA ending.",
@@ -2142,7 +2145,6 @@
           brand: "Creator Gear Sample",
           initials: "CL",
           category: "Creator Gear",
-          commission: "12%",
           status: "Reuse winner",
           platform: "TikTok Shop",
           filmingTask: "Create a new hook and reuse the strongest B-roll from the first video.",
@@ -2153,7 +2155,6 @@
           brand: "Beauty Travel Co",
           initials: "MP",
           category: "Travel / Beauty",
-          commission: "16%",
           status: "Showcase product only",
           platform: "TikTok Shop",
           filmingTask: "Film purse dump, packing test, zipper closeup, and final packed bag shot.",
@@ -2164,7 +2165,6 @@
           brand: "Clean Desk Finds",
           initials: "DV",
           category: "Home Office",
-          commission: "20%",
           status: "New sample requested",
           platform: "TikTok Shop",
           filmingTask: "Film crumbs on desk, one-pass cleanup, noise test, and closeup of the bin.",
@@ -2175,7 +2175,6 @@
           brand: "Morning Hair Sample",
           initials: "HC",
           category: "Beauty / Hair",
-          commission: "14%",
           status: "Needs TikTok content",
           platform: "TikTok Shop",
           filmingTask: "Film night setup, morning reveal, closeup curl check, and honest wear test.",
@@ -2192,6 +2191,7 @@
       const nav = document.querySelector("#nav");
       const tabs = document.querySelector("#tabs");
       const title = document.querySelector("#page-title");
+      let editingScriptIndex = null;
 
       function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, (character) => ({
@@ -2258,10 +2258,33 @@
         return document.body.dataset.plan || "free";
       }
 
+      function isProPlan() {
+        return currentPlan() === "pro" || localStorage.getItem("creatorvault-pro-demo") === "true";
+      }
+
       function visibleShowcaseItems() {
-        return currentPlan() === "pro" || localStorage.getItem("creatorvault-pro-demo") === "true"
+        return isProPlan()
           ? showcaseItems
           : showcaseItems.slice(0, 3);
+      }
+
+      function scriptCard(script, index) {
+        return `
+          <div class="card saved-script-card">
+            <span class="chip">${escapeHtml(script.status || "saved")}</span>
+            <strong style="display:block;margin-top:8px">${escapeHtml(script.hook || script.onScreenHook || "Saved script set")}</strong>
+            <div class="stack" style="margin-top:10px">
+              <p class="muted"><strong>On-screen hook:</strong> ${escapeHtml(script.hook || script.onScreenHook || "Saved for reuse.")}</p>
+              <p class="muted" style="white-space: pre-wrap"><strong>Voiceover:</strong> ${escapeHtml(script.voiceover || "Add voiceover.")}</p>
+              <p class="muted" style="white-space: pre-wrap"><strong>Summary / caption:</strong> ${escapeHtml(script.caption || "Add caption.")}</p>
+              <p class="muted"><strong>Tags:</strong> ${escapeHtml(script.tags || "Add tags.")}</p>
+            </div>
+            <div class="actions" style="margin-top: 10px">
+              <button class="btn" type="button" data-copy-script="${index}">Copy</button>
+              <button class="btn" type="button" data-edit-script="${index}">Edit</button>
+            </div>
+          </div>
+        `;
       }
 
       function renderWorkspaceConnections(product) {
@@ -2269,37 +2292,27 @@
         const record = records[productKey(product)] || { scripts: [], assets: [], hooks: [] };
         const scriptHost = document.querySelector("#workspace-scripts");
         const ideaPreviewHost = document.querySelector("#workspace-idea-preview");
+        const quickPreviewHost = document.querySelector("#quick-script-preview");
+        const builderPreviewHost = document.querySelector("#script-builder-preview");
         const assetHost = document.querySelector("#workspace-assets");
-        const savedScripts = [...(record.hooks || []).map((hook) => ({
-          hook,
-          voiceover: "Saved from Hook Bank. Build this into a product script.",
-          status: "hook"
-        })), ...(record.scripts || [])];
+        const savedScripts = record.scripts || [];
 
         if (scriptHost) {
           scriptHost.innerHTML = savedScripts.length
-            ? savedScripts.map((script) => `
-              <div class="card">
-                <strong>${escapeHtml(script.hook || "Saved script")}</strong>
-                <p class="muted">${escapeHtml(script.voiceover || "Voiceover and product notes saved here.")}</p>
-                <span class="chip">${escapeHtml(script.status || "scripted")}</span>
-              </div>
-            `).join("")
+            ? savedScripts.map((script, index) => scriptCard(script, index)).join("")
             : `<div class="card"><strong>No saved scripts yet</strong><p class="muted">Create a script or attach a hook and it will show here for ${escapeHtml(product.name)}.</p></div>`;
         }
 
-        if (ideaPreviewHost) {
+        [ideaPreviewHost, quickPreviewHost, builderPreviewHost].forEach((host) => {
+          if (!host) return;
           const latestScripts = savedScripts.slice(-3).reverse();
-          ideaPreviewHost.innerHTML = latestScripts.length
-            ? latestScripts.map((script) => `
-              <div class="card">
-                <span class="chip">${escapeHtml(script.status || "saved")}</span>
-                <strong style="display:block;margin-top:8px">${escapeHtml(script.hook || "Saved script")}</strong>
-                <p class="muted">${escapeHtml(script.voiceover || "Saved for reuse.")}</p>
-              </div>
-            `).join("")
+          host.innerHTML = latestScripts.length
+            ? latestScripts.map((script) => {
+              const originalIndex = savedScripts.indexOf(script);
+              return scriptCard(script, originalIndex);
+            }).join("")
             : `<div class="notice"><strong>Nothing saved yet.</strong><p class="muted" style="margin-top: 6px">Add a hook or script above and it will appear here immediately.</p></div>`;
-        }
+        });
 
         if (assetHost) {
           const savedAssets = record.assets || [];
@@ -2320,14 +2333,13 @@
         const record = records[productKey(product)] || {};
         document.querySelector("#workspace-title").textContent = product.name;
         document.querySelector("#workspace-photo").textContent = product.initials;
-        document.querySelector("#workspace-description").textContent = `${product.brand} sample pulled from TikTok Showcase and ready to connect to scripts, clips, filming plans, posts, and performance.`;
+        document.querySelector("#workspace-description").textContent = `${product.brand} product pulled from TikTok Showcase and ready to connect to footage, hooks, voiceovers, captions, tags, posts, and performance.`;
         document.querySelector("#workspace-platform").textContent = product.platform;
-        document.querySelector("#workspace-commission").textContent = `${product.commission} commission`;
         document.querySelector("#workspace-delivery").textContent = record.status || product.status;
         document.querySelector("#workspace-sample-status").value =
           record.status || (product.status === "Sample delivered" ? "New sample received" : "Showcase product only");
         document.querySelector("#live-product-name").textContent = product.name;
-        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${record.status || product.status} - ${product.commission} commission.`;
+        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${record.status || product.status}.`;
         document.querySelector("#live-filming-task").textContent = product.filmingTask;
         document.querySelector("#live-script-starter").textContent = product.scriptStarter;
         document.querySelector("#script-product").value = product.name;
@@ -2381,22 +2393,38 @@
         return product;
       }
 
-      function saveIdeaToProduct({ hook, voiceover, tags, statusMessageSelector }) {
+      function saveIdeaToProduct({ hook, voiceover, caption = "", tags, statusMessageSelector, status = "saved" }) {
         const product = ensureActiveProduct();
         const finalHook = hook.trim() || product.scriptStarter;
         const finalVoiceover = voiceover.trim() || product.filmingTask;
+        const finalCaption = caption.trim();
         const finalTags = tags.trim();
         const records = getProductRecords();
         const existing = records[productKey(product)]?.scripts || [];
+        const nextScript = {
+          hook: finalHook,
+          voiceover: finalVoiceover,
+          caption: finalCaption,
+          tags: finalTags,
+          status
+        };
+        if (!isProPlan() && editingScriptIndex === null && existing.length >= 2) {
+          showLocalStatus(statusMessageSelector, "Free includes 2 saved scripts per product. Upgrade to Pro for unlimited scripts.");
+          notify("Free includes 2 scripts per product. Upgrade to Pro for unlimited scripts.");
+          return product;
+        }
+        const updatedScripts = [...existing];
+        if (editingScriptIndex !== null && updatedScripts[editingScriptIndex]) {
+          updatedScripts[editingScriptIndex] = nextScript;
+        } else {
+          updatedScripts.push(nextScript);
+        }
         saveProductRecord(product, {
-          scripts: [...existing, {
-            hook: finalHook,
-            voiceover: finalTags ? `${finalVoiceover}\n\nTags: ${finalTags}` : finalVoiceover,
-            status: "saved"
-          }]
+          scripts: updatedScripts
         });
+        editingScriptIndex = null;
         updateWorkspaceProduct(product);
-        showLocalStatus(statusMessageSelector, `Saved to ${product.name}. It is now listed in this workspace.`);
+        showLocalStatus(statusMessageSelector, `Saved to ${product.name}. You can now copy or edit it below.`);
         notify(`Script saved to ${product.name}.`);
         return product;
       }
@@ -2428,7 +2456,6 @@
             </div>
             <div class="sample-meta">
               <span class="chip">${item.platform}</span>
-              <span class="chip">${item.commission} commission</span>
               <span class="chip">${item.status}</span>
             </div>
             <button class="btn primary" type="button">Organize this sample</button>
@@ -2461,7 +2488,6 @@
               <p class="muted" style="margin-top: 6px">${item.category}</p>
             </div>
             <div class="sample-meta">
-              <span class="chip">${item.commission} commission</span>
               <span class="chip">${item.status}</span>
             </div>
             <button class="btn primary" type="button">Open workspace</button>
@@ -2558,15 +2584,14 @@
           .forEach((product, index) => {
             const card = document.createElement("article");
             card.className = "card";
-            card.innerHTML = `<p class="label">${product[3]}</p><h3>${product[0]}</h3><p class="muted">${product[1]} - ${product[2]}</p><div class="stack" style="margin-top:12px"><span class="chip">${product[4]}</span><p><strong>Sample:</strong> ${product[5]}</p><p class="muted">${product[6]}</p><button class="btn primary" type="button">Open workspace</button></div>`;
+            card.innerHTML = `<p class="label">${product[3]}</p><h3>${product[0]}</h3><p class="muted">${product[1]} - ${product[2]}</p><div class="stack" style="margin-top:12px"><span class="chip">${product[4]}</span><p class="muted">${product[5]}</p><button class="btn primary" type="button">Open workspace</button></div>`;
             card.querySelector("button").addEventListener("click", () => {
               const matched = product[3] === "TikTok Shop" ? showcaseItems[0] : {
                 name: product[0],
                 brand: product[1],
                 initials: product[0].split(" ").map((word) => word[0]).join("").slice(0, 2).toUpperCase(),
                 category: product[2],
-                commission: product[4],
-                status: product[5],
+                status: product[4],
                 platform: product[3],
                 filmingTask: "Create hook, demo, closeup, B-roll, and CTA for this product.",
                 scriptStarter: "Here is why this product is useful and how I would show it fast."
@@ -2626,7 +2651,7 @@
           <div class="card">
             <strong>${escapeHtml(item.name)}</strong>
             <p class="muted">${escapeHtml(item.brand)} - ${escapeHtml(item.category)} - ${escapeHtml(item.status)}</p>
-            <span class="chip">${escapeHtml(item.commission)} commission</span>
+            <span class="chip">${escapeHtml(item.status)}</span>
           </div>
         `).join("");
       }
@@ -2754,7 +2779,6 @@
           brand: "Tester Brand",
           initials: `N${count}`,
           category: "TikTok Shop",
-          commission: "15%",
           status: "New sample received",
           platform: "TikTok Shop",
           filmingTask: "Film hook, product demo, closeup, B-roll, and CTA.",
@@ -2775,21 +2799,26 @@
         saveIdeaToProduct({
           hook: document.querySelector("#quick-hook-input").value,
           voiceover: document.querySelector("#quick-script-input").value,
-          tags: "",
+          caption: document.querySelector("#quick-caption-input").value,
+          tags: document.querySelector("#quick-tags-input").value,
           statusMessageSelector: "#quick-idea-status"
         });
         document.querySelector("#quick-hook-input").value = "";
         document.querySelector("#quick-script-input").value = "";
+        document.querySelector("#quick-caption-input").value = "";
+        document.querySelector("#quick-tags-input").value = "";
       });
       document.querySelector("#save-workspace-idea")?.addEventListener("click", () => {
         saveIdeaToProduct({
           hook: document.querySelector("#workspace-hook-input").value,
           voiceover: document.querySelector("#workspace-script-input").value,
+          caption: document.querySelector("#workspace-caption-input").value,
           tags: document.querySelector("#workspace-tags-input").value,
           statusMessageSelector: "#workspace-idea-status"
         });
         document.querySelector("#workspace-hook-input").value = "";
         document.querySelector("#workspace-script-input").value = "";
+        document.querySelector("#workspace-caption-input").value = "";
         document.querySelector("#workspace-tags-input").value = "";
       });
       document.querySelector("#save-workspace-asset")?.addEventListener("click", () => {
@@ -2829,6 +2858,48 @@
         showLocalStatus("#workspace-asset-status", `${imported.length} file(s) saved to ${product.name}.`);
         notify(`${imported.length} file(s) saved to ${product.name}.`);
       });
+      document.addEventListener("click", async (event) => {
+        const copyButton = event.target.closest("[data-copy-script]");
+        if (copyButton) {
+          const index = Number(copyButton.dataset.copyScript);
+          const product = ensureActiveProduct();
+          const record = getProductRecords()[productKey(product)] || {};
+          const script = (record.scripts || [])[index];
+          const text = script
+            ? [
+              `On-screen hook: ${script.hook || script.onScreenHook || ""}`,
+              `Voiceover: ${script.voiceover || ""}`,
+              `Summary / caption: ${script.caption || ""}`,
+              `Tags: ${script.tags || ""}`
+            ].join("\n\n").trim()
+            : "";
+          try {
+            await navigator.clipboard.writeText(text);
+            copyButton.textContent = "Copied";
+          } catch {
+            copyButton.textContent = "Copy text selected";
+          }
+          setTimeout(() => (copyButton.textContent = "Copy"), 1200);
+          return;
+        }
+
+        const editButton = event.target.closest("[data-edit-script]");
+        if (editButton) {
+          const index = Number(editButton.dataset.editScript);
+          const product = ensureActiveProduct();
+          const record = getProductRecords()[productKey(product)] || {};
+          const script = (record.scripts || [])[index];
+          if (!script) return;
+          editingScriptIndex = index;
+          switchSection("Product Workspace");
+          document.querySelector("#quick-hook-input").value = script.hook || "";
+          document.querySelector("#quick-script-input").value = script.voiceover || "";
+          document.querySelector("#quick-caption-input").value = script.caption || "";
+          document.querySelector("#quick-tags-input").value = script.tags || "";
+          showLocalStatus("#quick-idea-status", "Editing saved script. Make changes above, then save.");
+          document.querySelector("#quick-hook-input")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
       document.querySelector("#workspace-pro-match")?.addEventListener("click", () => {
         runAutoMatchDemo();
         openSection("Product Workspace");
@@ -2866,101 +2937,11 @@
         localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
         saveProductRecord(product, { status: event.target.value });
         document.querySelector("#workspace-delivery").textContent = event.target.value;
-        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${event.target.value} - ${product.commission} commission.`;
+        document.querySelector("#live-product-notes").textContent = `${product.brand} - ${product.category} - ${event.target.value}.`;
         notify(`${product.name} status saved as ${event.target.value}.`);
       });
       document.querySelector("#save-script")?.addEventListener("click", () => {
-        const product = getActiveProduct();
-        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
-        const records = getProductRecords();
-        const existing = records[productKey(product)]?.scripts || [];
-        saveProductRecord(product, {
-          scripts: [...existing, {
-            hook: document.querySelector("#script-hook").value,
-            voiceover: document.querySelector("#script-voiceover").value,
-            onscreen: document.querySelector("#script-onscreen").value,
-            cta: document.querySelector("#script-cta").value,
-            status: document.querySelector("#script-status").value
-          }]
-        });
-        updateWorkspaceProduct(product);
-        notify(`Script saved to ${product.name}.`);
-        switchSection("Product Workspace");
-      });
-      document.querySelector("#save-vault-asset")?.addEventListener("click", () => {
-        const product = getActiveProduct();
-        const name = document.querySelector("#vault-name").value.trim();
-        if (!name) {
-          notify("Add a file name, link, or note first.");
-          return;
-        }
-        localStorage.setItem("creatorvault-selected-product", JSON.stringify(product));
-        const records = getProductRecords();
-        const existing = records[productKey(product)]?.assets || [];
-        saveProductRecord(product, {
-          assets: [...existing, {
-            name,
-            type: document.querySelector("#vault-type").value,
-            note: document.querySelector("#vault-note").value
-          }]
-        });
-        document.querySelector("#vault-name").value = "";
-        updateWorkspaceProduct(product);
-        notify(`${name} saved to ${product.name}.`);
-        switchSection("Product Workspace");
-      });
-      document.querySelector("#activate-pro-demo")?.addEventListener("click", activateProDemo);
-      document.querySelector("#pro-full-import")?.addEventListener("click", renderFullImportDemo);
-      document.querySelector("#pro-auto-match")?.addEventListener("click", runAutoMatchDemo);
-      document.querySelector("#pro-rescue")?.addEventListener("click", buildRescueDemo);
-      document.querySelector("#pro-reuse")?.addEventListener("click", generateReuseDemo);
-      document.querySelector("#pull-showcase")?.addEventListener("click", () => {
-        renderFullImportDemo();
-        notify("Full demo Showcase pulled. Open any product to test the full workflow.");
-      });
-      document.querySelectorAll(".mode-toggle button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.body.dataset.plan = button.dataset.plan;
-          if (button.dataset.plan === "pro") {
-            localStorage.setItem("creatorvault-pro-demo", "true");
-          } else {
-            localStorage.removeItem("creatorvault-pro-demo");
-          }
-          renderShowcaseItems();
-          renderPulledProducts();
-        });
-      });
-      document.querySelectorAll("[data-jump]").forEach((button) => {
-        button.addEventListener("click", () => openSection(button.dataset.jump));
-      });
-      document.querySelectorAll("[data-scroll-to]").forEach((button) => {
-        button.addEventListener("click", () => {
-          ensureActiveProduct();
-          const target = document.querySelector(`#${button.dataset.scrollTo}`);
-          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
-      if (localStorage.getItem("creatorvault-pro-demo") === "true") {
-        document.body.dataset.plan = "pro";
-      }
-      renderProducts();
-      renderHooks();
-      renderPulledProducts();
-      if (localStorage.getItem("creatorvault-showcase-pulled") === "true") {
-        document.querySelector("#import-status")?.classList.add("active");
-        renderShowcaseItems();
-        renderPulledProducts();
-      }
-      const savedProduct = localStorage.getItem("creatorvault-selected-product");
-      if (savedProduct) {
-        const parsed = JSON.parse(savedProduct);
-        const index = showcaseItems.findIndex((item) => item.name === parsed.name);
-        if (index >= 0) {
-          updateWorkspaceProduct(showcaseItems[index]);
-        } else {
-          updateWorkspaceProduct(parsed);
-        }
-      }
-    </script>
-  </body>
-</html>
+        saveIdeaToProduct({
+          hook: document.querySelector("#script-hook").value,
+          voiceover: document.querySelector("#script-voiceover").value,
+          caption: document.querySelector("#script-ons
