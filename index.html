@@ -525,7 +525,7 @@
 
       .workspace-hero-photo {
         display: grid;
-        min-height: 280px;
+        min-height: 160px;
         place-items: center;
         border-radius: 8px;
         background:
@@ -693,6 +693,20 @@
           linear-gradient(135deg, rgba(0, 242, 234, 0.12), rgba(255, 0, 80, 0.08)),
           white;
         padding: 14px;
+      }
+
+      .save-status {
+        display: none;
+        border: 1px solid rgba(16, 185, 129, 0.22);
+        border-radius: 8px;
+        background: rgba(236, 253, 245, 0.95);
+        color: #065f46;
+        padding: 10px 12px;
+        font-weight: 850;
+      }
+
+      .save-status.active {
+        display: block;
       }
 
       .mode-toggle {
@@ -1209,7 +1223,7 @@
           <div class="logo">CV</div>
           <div>
             <p class="muted">CreatorVault</p>
-            <h1>Product-to-post hub</h1>
+            <h1>Easy product workspace</h1>
           </div>
         </div>
 
@@ -1217,8 +1231,8 @@
 
         <div class="sandbox panel">
           <p class="label">Start here</p>
-          <h3 style="margin-top: 6px">Pull products. Pick one. Save everything there.</h3>
-          <p class="muted" style="margin-top: 6px">Simple enough for daily use, powerful enough for Pro creators.</p>
+          <h3 style="margin-top: 6px">Pick a product. Add scripts and footage.</h3>
+          <p class="muted" style="margin-top: 6px">Everything for that product stays in one easy workspace.</p>
           <div class="mode-toggle" style="margin-top: 12px">
             <button data-plan="free">Free</button>
             <button data-plan="pro">Pro</button>
@@ -1755,54 +1769,24 @@
         </section>
 
         <section class="section" data-section="Product Workspace">
-          <div class="panel card rescue">
-            <div class="workspace-section-title">
-              <div>
-                <p class="label">TikTok content needed first</p>
-                <h3 style="margin-top: 6px">Samples that still need a TikTok post</h3>
-              </div>
-              <span class="chip">Priority queue</span>
-            </div>
-            <p class="muted" style="margin-top: 8px">These products should stay at the top so samples do not get buried before content is filmed, edited, and posted.</p>
-            <div class="stack" style="margin-top: 14px">
-              <article class="card priority-card">
-                <div class="mini-photo">HM</div>
-                <div>
-                  <strong>Hydrating Facial Mist Sprayer</strong>
-                  <p class="muted" style="margin-top: 4px">Sample delivered. Needs first TikTok demo, closeup, and CTA clip.</p>
-                  <div class="sample-meta" style="margin-top: 8px"><span class="chip">Due soon</span><span class="chip">No TikTok posted</span><span class="chip">18% commission</span></div>
-                </div>
-                <div class="stack">
-                  <button class="btn primary" onclick="selectShowcaseProduct(0)">Open workspace</button>
-                  <button class="btn" data-jump="Scripts">Create TikTok script</button>
-                </div>
-              </article>
-              <article class="card priority-card">
-                <div class="mini-photo">CO</div>
-                <div>
-                  <strong>Countertop Storage Organizer</strong>
-                  <p class="muted" style="margin-top: 4px">High commission product. Needs first filming plan and raw clip saved.</p>
-                  <div class="sample-meta" style="margin-top: 8px"><span class="chip">Needs filming</span><span class="chip">No clips yet</span><span class="chip">22% commission</span></div>
-                </div>
-                <div class="stack">
-                  <button class="btn primary" onclick="selectShowcaseProduct(1)">Open workspace</button>
-                  <button class="btn" data-jump="Scripts">Create TikTok script</button>
-                </div>
-              </article>
-            </div>
-          </div>
-
           <div class="panel card">
             <div class="workspace-summary">
               <div class="workspace-hero-photo" id="workspace-photo">CV</div>
               <div>
-                <p class="label">Product command center</p>
+                <p class="label">Product workspace</p>
                 <h3 id="workspace-title" style="margin-top: 6px; font-size: 34px">Choose a TikTok product to organize</h3>
                 <p id="workspace-description" class="muted" style="margin-top: 10px">Pull TikTok Showcase items, pick the real sample/product, then everything for that product lives here.</p>
                 <div class="actions" style="margin-top: 14px">
                   <span class="chip" id="workspace-platform">TikTok product</span>
                   <span class="chip" id="workspace-commission">Commission</span>
                   <span class="chip" id="workspace-delivery">Sample status</span>
+                </div>
+                <div class="stack" style="margin-top: 16px">
+                  <span class="label">Quick add script</span>
+                  <input class="field" id="quick-hook-input" placeholder="Hook for this product" />
+                  <textarea class="field" id="quick-script-input" style="min-height: 58px" placeholder="Script, voiceover, CTA, proof, tags"></textarea>
+                  <button class="btn primary" id="quick-save-idea">Save script to this product</button>
+                  <div class="save-status" id="quick-idea-status">Script saved to this product.</div>
                 </div>
                 <div class="actions" style="margin-top: 18px">
                   <button class="btn primary" data-scroll-to="workspace-footage">Add footage</button>
@@ -1842,13 +1826,15 @@
           <div class="grid two">
             <div class="panel card" id="workspace-ideas">
               <p class="label">Hooks, scripts, and tags</p>
-              <h3 style="margin-top: 6px">Save the wording that works for this product.</h3>
-              <p class="muted" style="margin-top: 8px">Keep hooks, talking points, CTAs, and tags here so they can be reused for this product later.</p>
+              <h3 style="margin-top: 6px">Add reusable wording.</h3>
+              <p class="muted" style="margin-top: 8px">Save hooks, script notes, CTAs, and tags for this exact product.</p>
               <div class="stack" style="margin-top: 14px">
                 <input class="field" id="workspace-hook-input" placeholder="Hook that stops the scroll" />
                 <textarea class="field" id="workspace-script-input" placeholder="Voiceover, script, talking points, proof, CTA"></textarea>
                 <input class="field" id="workspace-tags-input" placeholder="#tiktokshop #affiliatefinds #productdemo" />
                 <button class="btn primary" id="save-workspace-idea">Save to this product</button>
+                <div class="save-status" id="workspace-idea-status">Saved to this product.</div>
+                <div class="stack" id="workspace-idea-preview"></div>
               </div>
             </div>
 
@@ -1872,6 +1858,7 @@
                 </select>
                 <input class="field" id="workspace-asset-note" placeholder="Where it is saved, what it shows, or how to reuse it" />
                 <button class="btn coral" id="save-workspace-asset">Save footage to this product</button>
+                <div class="save-status" id="workspace-asset-status">Footage saved to this product.</div>
               </div>
             </div>
           </div>
@@ -2260,6 +2247,13 @@
         status.classList.add("active");
       }
 
+      function showLocalStatus(selector, message) {
+        const status = document.querySelector(selector);
+        if (!status) return;
+        status.textContent = message;
+        status.classList.add("active");
+      }
+
       function currentPlan() {
         return document.body.dataset.plan || "free";
       }
@@ -2274,14 +2268,15 @@
         const records = getProductRecords();
         const record = records[productKey(product)] || { scripts: [], assets: [], hooks: [] };
         const scriptHost = document.querySelector("#workspace-scripts");
+        const ideaPreviewHost = document.querySelector("#workspace-idea-preview");
         const assetHost = document.querySelector("#workspace-assets");
+        const savedScripts = [...(record.hooks || []).map((hook) => ({
+          hook,
+          voiceover: "Saved from Hook Bank. Build this into a product script.",
+          status: "hook"
+        })), ...(record.scripts || [])];
 
         if (scriptHost) {
-          const savedScripts = [...(record.hooks || []).map((hook) => ({
-            hook,
-            voiceover: "Saved from Hook Bank. Build this into a product script.",
-            status: "hook"
-          })), ...(record.scripts || [])];
           scriptHost.innerHTML = savedScripts.length
             ? savedScripts.map((script) => `
               <div class="card">
@@ -2291,6 +2286,19 @@
               </div>
             `).join("")
             : `<div class="card"><strong>No saved scripts yet</strong><p class="muted">Create a script or attach a hook and it will show here for ${escapeHtml(product.name)}.</p></div>`;
+        }
+
+        if (ideaPreviewHost) {
+          const latestScripts = savedScripts.slice(-3).reverse();
+          ideaPreviewHost.innerHTML = latestScripts.length
+            ? latestScripts.map((script) => `
+              <div class="card">
+                <span class="chip">${escapeHtml(script.status || "saved")}</span>
+                <strong style="display:block;margin-top:8px">${escapeHtml(script.hook || "Saved script")}</strong>
+                <p class="muted">${escapeHtml(script.voiceover || "Saved for reuse.")}</p>
+              </div>
+            `).join("")
+            : `<div class="notice"><strong>Nothing saved yet.</strong><p class="muted" style="margin-top: 6px">Add a hook or script above and it will appear here immediately.</p></div>`;
         }
 
         if (assetHost) {
@@ -2370,6 +2378,26 @@
         });
         updateWorkspaceProduct(product);
         notify(`${name} saved to ${product.name}.`);
+        return product;
+      }
+
+      function saveIdeaToProduct({ hook, voiceover, tags, statusMessageSelector }) {
+        const product = ensureActiveProduct();
+        const finalHook = hook.trim() || product.scriptStarter;
+        const finalVoiceover = voiceover.trim() || product.filmingTask;
+        const finalTags = tags.trim();
+        const records = getProductRecords();
+        const existing = records[productKey(product)]?.scripts || [];
+        saveProductRecord(product, {
+          scripts: [...existing, {
+            hook: finalHook,
+            voiceover: finalTags ? `${finalVoiceover}\n\nTags: ${finalTags}` : finalVoiceover,
+            status: "saved"
+          }]
+        });
+        updateWorkspaceProduct(product);
+        showLocalStatus(statusMessageSelector, `Saved to ${product.name}. It is now listed in this workspace.`);
+        notify(`Script saved to ${product.name}.`);
         return product;
       }
 
@@ -2505,6 +2533,8 @@
         document.querySelectorAll("[data-target]").forEach((button) => {
           button.classList.toggle("active", button.dataset.target === name || (name === "Products" && button.dataset.target === "TikTok Products") || (name === "Pro Demo" && button.dataset.target === "Upgrade") || (name === "What We Are" && button.dataset.target === "Help"));
         });
+        document.querySelector(".main")?.scrollIntoView({ behavior: "auto", block: "start" });
+        window.scrollTo({ top: 0, behavior: "auto" });
       }
 
       sections.forEach((section) => {
@@ -2741,25 +2771,26 @@
         notify(`${product.name} created and opened.`);
         openSection("Product Workspace");
       });
+      document.querySelector("#quick-save-idea")?.addEventListener("click", () => {
+        saveIdeaToProduct({
+          hook: document.querySelector("#quick-hook-input").value,
+          voiceover: document.querySelector("#quick-script-input").value,
+          tags: "",
+          statusMessageSelector: "#quick-idea-status"
+        });
+        document.querySelector("#quick-hook-input").value = "";
+        document.querySelector("#quick-script-input").value = "";
+      });
       document.querySelector("#save-workspace-idea")?.addEventListener("click", () => {
-        const product = ensureActiveProduct();
-        const hook = document.querySelector("#workspace-hook-input").value.trim() || product.scriptStarter;
-        const voiceover = document.querySelector("#workspace-script-input").value.trim() || product.filmingTask;
-        const tags = document.querySelector("#workspace-tags-input").value.trim();
-        const records = getProductRecords();
-        const existing = records[productKey(product)]?.scripts || [];
-        saveProductRecord(product, {
-          scripts: [...existing, {
-            hook,
-            voiceover: tags ? `${voiceover}\n\nTags: ${tags}` : voiceover,
-            status: "saved"
-          }]
+        saveIdeaToProduct({
+          hook: document.querySelector("#workspace-hook-input").value,
+          voiceover: document.querySelector("#workspace-script-input").value,
+          tags: document.querySelector("#workspace-tags-input").value,
+          statusMessageSelector: "#workspace-idea-status"
         });
         document.querySelector("#workspace-hook-input").value = "";
         document.querySelector("#workspace-script-input").value = "";
         document.querySelector("#workspace-tags-input").value = "";
-        updateWorkspaceProduct(product);
-        notify(`Hooks, script, and tags saved to ${product.name}.`);
       });
       document.querySelector("#save-workspace-asset")?.addEventListener("click", () => {
         const product = ensureActiveProduct();
@@ -2780,6 +2811,7 @@
         document.querySelector("#workspace-asset-name").value = "";
         document.querySelector("#workspace-asset-note").value = "";
         updateWorkspaceProduct(product);
+        showLocalStatus("#workspace-asset-status", `${name} saved to ${product.name}. It is now in Saved footage.`);
         notify(`${name} saved under ${product.name}.`);
       });
       document.querySelector("#workspace-file-import")?.addEventListener("change", (event) => {
@@ -2794,6 +2826,7 @@
         if (!imported.length) return;
         saveProductRecord(product, { assets: [...existing, ...imported] });
         updateWorkspaceProduct(product);
+        showLocalStatus("#workspace-asset-status", `${imported.length} file(s) saved to ${product.name}.`);
         notify(`${imported.length} file(s) saved to ${product.name}.`);
       });
       document.querySelector("#workspace-pro-match")?.addEventListener("click", () => {
