@@ -1244,61 +1244,38 @@
         <header class="topbar panel">
           <div>
             <p class="label">CreatorVault</p>
-            <h2 id="page-title">Today</h2>
+            <h2 id="page-title">Products that need footage</h2>
           </div>
           <div class="actions">
-            <button class="btn primary" data-jump="TikTok Products">Pull products</button>
-            <button class="btn coral" data-jump="Product Workspace">Active workspace</button>
-            <button class="btn" data-jump="Product Workspace">Save footage</button>
+            <button class="btn primary" data-jump="Products that need footage">Products needing footage</button>
+            <button class="btn coral" data-jump="TikTok Products">All TikTok products</button>
+            <button class="btn" data-jump="Upgrade">Pro tools</button>
           </div>
         </header>
 
-        <div class="tab panel" id="tabs"></div>
+        <div class="tab panel" id="tabs" style="display:none"></div>
 
-        <section class="section active" data-section="Today">
+        <section class="section active" data-section="Products that need footage">
           <div class="panel card">
-            <p class="label">Today</p>
-            <h3 style="margin-top: 6px; font-size: 28px">What needs attention before content gets lost?</h3>
-            <p class="muted" style="margin-top: 10px; max-width: 850px">Start with the products that need content, then save clips, scripts, edits, and results back to one product workspace.</p>
+            <p class="label">Products that need footage</p>
+            <h3 style="margin-top: 6px; font-size: 28px">Pick the product first. Then do all the work inside its workspace.</h3>
+            <p class="muted" style="margin-top: 10px; max-width: 850px">This is the main screen: open a product, add footage, save on-screen hooks, voiceovers, captions, and tags, then come back here for the next product.</p>
             <div class="actions" style="margin-top: 14px">
-              <button class="btn primary" data-jump="TikTok Products">Pull or open products</button>
-              <button class="btn" data-jump="Product Workspace">Save clips or edits</button>
+              <button class="btn primary" data-jump="TikTok Products">See all TikTok products</button>
               <button class="btn coral" data-jump="Upgrade">Try Pro workflow</button>
             </div>
           </div>
 
-          <div class="grid metrics">
-            <div class="card metric" data-jump="TikTok Products"><p class="muted">Products needing content</p><strong>6</strong><p class="muted">Open one workspace</p></div>
-            <div class="card metric" data-jump="Product Workspace"><p class="muted">Clips to save</p><strong>18</strong><p class="muted">Camera, CapCut, AI</p></div>
-            <div class="card metric" data-jump="Post Planner"><p class="muted">Ready to post</p><strong>4</strong><p class="muted">Final edits waiting</p></div>
-            <div class="card metric" data-jump="Upgrade"><p class="muted">Pro automations</p><strong>4</strong><p class="muted">Import, match, rescue, reuse</p></div>
-          </div>
-
-          <div class="panel card">
-            <p class="label">Easy daily flow</p>
-            <h3 style="margin-top: 6px">Use the same 4-step routine every time.</h3>
-            <div class="flow" style="margin-top: 14px">
-              <div class="flow-step"><span class="chip">1</span><strong>Pick product</strong><p class="muted">Open the sample/product you need to film.</p></div>
-              <div class="flow-step"><span class="chip">2</span><strong>Create</strong><p class="muted">Script, hook, shot list, or AI idea.</p></div>
-              <div class="flow-step"><span class="chip">3</span><strong>Save content</strong><p class="muted">Raw clips, CapCut exports, AI clips, finals.</p></div>
-              <div class="flow-step"><span class="chip">4</span><strong>Post or reuse</strong><p class="muted">Track results and remake what works.</p></div>
-            </div>
-          </div>
-
-          <div class="grid two">
-            <div class="panel card rescue">
-              <p class="label">Most urgent</p>
-              <h3 style="margin-top: 6px">Samples waiting for content</h3>
-              <div class="stack" style="margin-top: 14px">
-                <button class="card hub-card" onclick="selectShowcaseProduct(0)"><span class="chip">Delivered</span><strong>Hydrating Facial Mist Sprayer</strong><p class="muted">Needs first TikTok demo and closeup.</p></button>
-                <button class="card hub-card" onclick="selectShowcaseProduct(1)"><span class="chip">Needs filming</span><strong>Countertop Storage Organizer</strong><p class="muted">Needs filming plan and saved footage.</p></button>
+          <div class="panel card rescue">
+            <div class="workspace-section-title">
+              <div>
+                <p class="label">Start here</p>
+                <h3 style="margin-top: 6px">Open a product workspace</h3>
+                <p class="muted" style="margin-top: 6px">Click any product below to begin that product's footage, scripts, captions, and tags.</p>
               </div>
             </div>
-            <div class="panel card money">
-              <p class="label">Why Pro feels worth it</p>
-              <h3 style="margin-top: 6px">Less clicking, less losing content.</h3>
-              <p class="muted" style="margin-top: 8px">Pro pulls more products, matches clips to products, catches missing shots, and gives reuse ideas.</p>
-              <button class="btn coral" data-jump="Upgrade" style="margin-top: 14px">See Pro tools</button>
+            <div class="grid three" id="footage-products" style="margin-top: 14px">
+              <button class="card hub-card" onclick="selectShowcaseProduct(0)"><span class="chip">Delivered</span><strong>Hydrating Facial Mist Sprayer</strong><p class="muted">Needs first TikTok demo and closeup.</p></button>
             </div>
           </div>
         </section>
@@ -1676,7 +1653,7 @@
           </div>
           <div class="grid two">
             <div class="panel card">
-              <p class="label">Today, start here</p>
+              <p class="label">Start here</p>
               <h3 style="margin-top: 6px">Creator checklist</h3>
               <div class="stack" style="margin-top: 14px">
                 <label class="card" style="background: var(--oat)"><input type="checkbox" /> Check sample deliveries and mark anything ready to film</label>
@@ -2114,7 +2091,7 @@
     </div>
 
     <script>
-      const sections = ["Today", "TikTok Products", "Upgrade", "Help"];
+      const sections = ["Products that need footage", "TikTok Products", "Upgrade", "Help"];
       const hiddenSections = ["Plans", "Test & Share", "Import Hub", "TikTok Connect", "Command Center", "Samples", "Filming", "Scripts", "Hooks", "Post Planner", "Performance", "Admin"];
       const products = [
         ["TikTok Shop product in progress", "Brand saved", "Beauty or lifestyle", "TikTok Shop", "Delivered", "Delivery, first angle, AI clip, and final edit can live in one product workspace."]
@@ -2356,6 +2333,7 @@
       }
 
       function normalizeSectionName(name) {
+        if (name === "Today") return "Products that need footage";
         if (name === "Help") return "What We Are";
         if (name === "TikTok Products") name = "Products";
         if (name === "Upgrade") name = "Pro Demo";
@@ -2366,6 +2344,9 @@
           }
           renderShowcaseItems();
           renderPulledProducts();
+        }
+        if (name === "Products that need footage") {
+          renderFootageProducts();
         }
         if (name === "Pro Demo") {
           activateProDemo();
@@ -2379,6 +2360,25 @@
           ensureActiveProduct();
         }
         switchSection(name);
+      }
+
+      function renderFootageProducts() {
+        const host = document.querySelector("#footage-products");
+        if (!host) return;
+        const priorityStatuses = ["Sample delivered", "Needs filming", "Needs TikTok content", "New sample received"];
+        const items = visibleShowcaseItems().filter((item) => priorityStatuses.includes(item.status));
+        host.innerHTML = items.map((item) => {
+          const index = showcaseItems.findIndex((product) => product.name === item.name);
+          return `
+            <button class="card hub-card" type="button" data-open-product="${index}">
+              <div class="product-photo">${escapeHtml(item.initials)}</div>
+              <span class="chip">${escapeHtml(item.status)}</span>
+              <strong style="display:block;margin-top:10px">${escapeHtml(item.name)}</strong>
+              <p class="muted" style="margin-top:6px">${escapeHtml(item.filmingTask)}</p>
+              <span class="btn primary" style="margin-top:12px">Open workspace</span>
+            </button>
+          `;
+        }).join("");
       }
 
       function addDemoAssetToActive(name, type, note) {
@@ -2568,7 +2568,7 @@
           const button = document.createElement("button");
           button.textContent = section;
           button.dataset.target = section;
-          button.className = section === "Today" ? "active" : "";
+          button.className = section === "Products that need footage" ? "active" : "";
           button.addEventListener("click", () => openSection(section));
           host.appendChild(button);
         });
@@ -2859,6 +2859,12 @@
         notify(`${imported.length} file(s) saved to ${product.name}.`);
       });
       document.addEventListener("click", async (event) => {
+        const productButton = event.target.closest("[data-open-product]");
+        if (productButton) {
+          selectShowcaseProduct(Number(productButton.dataset.openProduct));
+          return;
+        }
+
         const copyButton = event.target.closest("[data-copy-script]");
         if (copyButton) {
           const index = Number(copyButton.dataset.copyScript);
@@ -2944,4 +2950,16 @@
         saveIdeaToProduct({
           hook: document.querySelector("#script-hook").value,
           voiceover: document.querySelector("#script-voiceover").value,
-          caption: document.querySelector("#script-ons
+          caption: document.querySelector("#script-onscreen").value,
+          tags: document.querySelector("#script-cta").value,
+          statusMessageSelector: "#quick-idea-status",
+          status: document.querySelector("#script-status").value
+        });
+        switchSection("Product Workspace");
+      });
+      document.querySelector("#save-vault-asset")?.addEventListener("click", () => {
+        const product = getActiveProduct();
+        const name = document.querySelector("#vault-name").value.trim();
+        if (!name) {
+          notify("Add a file name, link, or note first.");
+          retur
